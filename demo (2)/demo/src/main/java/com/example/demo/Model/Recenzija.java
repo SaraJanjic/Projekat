@@ -1,5 +1,8 @@
 package com.example.demo.Model;
 
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToOne;
+
 import java.util.Date;
 
 public class Recenzija {
@@ -10,6 +13,7 @@ public class Recenzija {
 
     private Date datumRecenzije;
 
+    @OneToOne(fetch = FetchType.EAGER)
     private Korisnik korisnik;
 
 
