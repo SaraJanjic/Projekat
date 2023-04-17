@@ -1,11 +1,15 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Recenzija {
+public class Recenzija implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
 
     private int ocena;
 

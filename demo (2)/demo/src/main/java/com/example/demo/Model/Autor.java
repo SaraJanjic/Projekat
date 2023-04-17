@@ -1,21 +1,23 @@
 package com.example.demo.Model;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Autor extends Korisnik{
 
+    @Column
     private boolean aktivnost;
 
     @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private ArrayList<Knjiga> knjige = new ArrayList<>();
+    private Set<Knjiga> knjige = new HashSet<>();
 
-    public Autor(String ime, String prezime, String userName, String email, String lozinka, Date datumRodjenja, String opis, Image slikaKorisnika, Uloga uloga, boolean aktivnost) {
+    public Autor(String ime, String prezime, String userName, String email, String lozinka, String datumRodjenja, String opis, Image slikaKorisnika, Uloga uloga, boolean aktivnost) {
         super(ime, prezime, userName, email, lozinka, datumRodjenja, opis, slikaKorisnika, uloga);
         this.aktivnost = aktivnost;
 
@@ -29,14 +31,14 @@ public class Autor extends Korisnik{
         this.aktivnost = aktivnost;
     }
 
-    public ArrayList<Knjiga> getKnjige() {
+
+    public Set<Knjiga> getKnjige() {
         return knjige;
     }
 
-    public void setKnjige(ArrayList<Knjiga> knjige) {
+    public void setKnjige(Set<Knjiga> knjige) {
         this.knjige = knjige;
     }
-
 
     @Override
     public String toString() {

@@ -1,19 +1,23 @@
-INSERT INTO KORISNIK (ime, prezime, userName, email, lozinka, datumRodjenja, opis, uloga) VALUES ('Smiljka', 'Trnjic', 'smiljka78', 'smiljka78@gmail.com', 'imenaunuka', '7/8/1978', 'Sta te ne stigne na Drini, stgne te na Cupriji!', KORISNIK);
+INSERT INTO KORISNIK (ime, prezime, userName, email, lozinka, datumRodjenja, opis, uloga) VALUES ('Smiljka', 'Trnjic', 'smiljka78', 'smiljka78@gmail.com', 'imenaunuka', '7/8/1978', 'Sta te ne stigne na Drini, stgne te na Cupriji!', CITALAC);
+INSERT INTO KORISNIK (ime, prezime, userName, email, lozinka, datumRodjenja, opis, uloga) VALUES ('Jovanka', 'Miljusic', 'joca99', 'jovanka99@gmail.com', 'funthings', '1/3/1999', 'Volim macke!', AUTOR);
 
-INSERT INTO AUTOR (ime, prezime, userName, email, lozinka, datumRodjenja, opis, uloga, aktivnost, knjige) VALUES ('Ivo', 'Andric', 'IvoAndric', 'Ivo.Andric@gmail.com', 'neznanje', '9/10/1892', 'Autor romana "Na Drini Cuprija!', AUTOR, NEAKTIVAN, 'Na Drini Cuprija');
+INSERT INTO AUTOR (aktivnost, id) VALUES (true, 2);
 
-INSERT INTO KNJIGA (naslov, ISBN, datumObjavljivanja, brstrana, opis, zanr, ocena) VALUES ('Na Drini Cuprija', 1234, 1/1/1945, 350, 'Patnja bosanskog naroda na pocetku...', 'istorijski roman', 4.33);
-INSERT INTO ZANR (nazivZanra) VALUES ('istorijski roman');
-INSERT INTO ZANR (nazivZanra) VALUES ('romansa');
-INSERT INTO ZANR (nazivZanra) VALUES ('komedija');
+INSERT INTO KNJIGA (naslov, ISBN, datum_objavljivanja, brstrana, opis, zanr_id, ocena, autor_id) VALUES ('Cvece u basti', 1234, 1/1/2020, 260, '...', 2, 3.80, 2);
+
+INSERT INTO ZANR (naziv_zanra) VALUES ('istorijski roman');
+INSERT INTO ZANR (naziv_zanra) VALUES ('romansa');
+INSERT INTO ZANR (naziv_zanra) VALUES ('komedija');
 
 
+INSERT INTO POLICA (naziv, oznaka_police) VALUES ('Want to Read', true);
+INSERT INTO POLICA (naziv, oznaka_police) VALUES ('Currently reading', true);
+INSERT INTO POLICA (naziv, oznaka_police) VALUES ('Read', true);
+
+INSERT INTO STAVKAPOLICE (knjiga_id, polica_id) VALUES (1, 1);
+
+INSERT INTO ZAHTEV (email, telefon, poruka, datum_zahteva, status) VALUES ('jovanka99@gmail.com', '069450786', 'Izdajte mi knjigu', '1/4/2019', ODOBREN);
+
+INSERT INTO RECENZIJA (ocena, tekst, datum_recenzije, korisnik_id, recenzija_id) VALUES (4, 'Svidelo mi se', '3/1/2020', 2, 1);
 
 
-/*
-INSERT INTO POLICA (naziv, oznakaPolice, stavka) VALUES ('Want to Read', true, );
-
-INSERT INTO STAVKAPOLICE (recenzija, knjiga) VALUES ();
-
-INSERT INTO POLICA (naziv, oznakaPolice, stavka) VALUES ('Want to Read', true, );
-*/

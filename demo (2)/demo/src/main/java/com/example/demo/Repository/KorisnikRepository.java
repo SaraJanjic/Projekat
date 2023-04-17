@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
 
-    Korisnik findByUserName(String userName);
+    Korisnik findById(long id);
 
 }

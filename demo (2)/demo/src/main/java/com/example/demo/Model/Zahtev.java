@@ -1,10 +1,11 @@
 package com.example.demo.Model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 enum Status{NA_CEKANJU, ODOBREN, ODBIJEN}
 
-public class Zahtev {
+public class Zahtev implements Serializable {
 
     private String email;
 

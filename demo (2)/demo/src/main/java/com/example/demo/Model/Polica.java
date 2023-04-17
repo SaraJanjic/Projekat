@@ -1,13 +1,17 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
-public class Polica {
+import java.io.Serializable;
+
+public class Polica implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @JoinColumn(name="polica_id")
+    private Long id;
 
     private String  naziv;
-
 
     private Boolean oznakaPolice;
 

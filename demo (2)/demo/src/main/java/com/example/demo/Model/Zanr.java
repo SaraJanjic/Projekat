@@ -1,8 +1,14 @@
 package com.example.demo.Model;
 
-import java.util.SplittableRandom;
+import jakarta.persistence.*;
 
-public class Zanr {
+import java.io.Serializable;
+
+public class Zanr implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
 
     private String nazivZanra;
 

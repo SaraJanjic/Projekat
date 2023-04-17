@@ -1,15 +1,21 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 
-public class StavkaPolice {
+import java.io.Serializable;
+
+public class StavkaPolice implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
 
     @OneToMany(mappedBy = "stavkapolice", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name="recenzija_id")
     private String recenzija;
 
-    @OneToMany(mappedBy = "stavkapolice", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne
+    @JoinColumn(name="knjiga_id")
     private Knjiga knjiga;
 
     public StavkaPolice(String recenzija, Knjiga knjiga) {

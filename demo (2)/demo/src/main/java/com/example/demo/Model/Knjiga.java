@@ -1,14 +1,15 @@
 package com.example.demo.Model;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import org.hibernate.annotations.ManyToAny;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Knjiga {
+public class Knjiga implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
 
     private String naslov;
 
@@ -21,11 +22,16 @@ public class Knjiga {
     private String opis;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="zanr_knjige")
+    @JoinColumn(name="zanr_id")
     private Zanr zanr;
 
     private Float ocena;
 
+    /*
+    @OneToOne
+    @JoinColumn(name="autor_id")
+    private Autor autor;
+*/
 
     public Knjiga(String naslov, int ISBN, Date datumObjavljivanja, int brStrana, String opis, Zanr zanr, Float ocena) {
         this.naslov = naslov;

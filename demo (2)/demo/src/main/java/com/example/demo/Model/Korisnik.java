@@ -1,13 +1,19 @@
 package com.example.demo.Model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.awt.*;
-import java.util.Date;
+import java.io.Serializable;
 
-enum Uloga{CITALAC, AUTOR, ADMINISTRATOR};
+enum Uloga{CITALAC, AUTOR, ADMINISTRATOR}
 
-public class Korisnik {
+public class Korisnik implements Serializable{
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
 
     @Column
     private String ime;
@@ -16,21 +22,25 @@ public class Korisnik {
 
     @Column(unique = true)
     private String userName;
+
     @Column(unique = true)
     private String email;
+
+    @Column
     private String lozinka;
 
     @Column
-    private Date datumRodjenja;
+    private String datumRodjenja;
 
     @Column
     private String opis;
 
     private Image slikaKorisnika;
 
+    @Column
     private Uloga uloga;
 
-    public Korisnik(String ime, String prezime, String userName, String email, String lozinka, Date datumRodjenja, String opis, Image slikaKorisnika, Uloga uloga) {
+    public Korisnik(String ime, String prezime, String userName, String email, String lozinka, String datumRodjenja, String opis, Image slikaKorisnika, Uloga uloga) {
         this.ime = ime;
         this.prezime = prezime;
         this.userName = userName;
@@ -40,6 +50,10 @@ public class Korisnik {
         this.opis = opis;
         this.slikaKorisnika = slikaKorisnika;
         this.uloga = uloga;
+    }
+
+    public Korisnik() {
+
     }
 
     public String getIme() {
@@ -82,11 +96,11 @@ public class Korisnik {
         this.lozinka = lozinka;
     }
 
-    public Date getDatumRodjenja() {
+    public String getDatumRodjenja() {
         return datumRodjenja;
     }
 
-    public void setDatumRodjenja(Date datumRodjenja) {
+    public void setDatumRodjenja(String datumRodjenja) {
         this.datumRodjenja = datumRodjenja;
     }
 

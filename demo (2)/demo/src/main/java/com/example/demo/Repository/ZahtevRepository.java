@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ZahtevRepository extends JpaRepository<Zahtev, Long> {
 
-    Zahtev findZahtevByEmail(String email);
+    Zahtev findZahtevById(long id );
 
 }

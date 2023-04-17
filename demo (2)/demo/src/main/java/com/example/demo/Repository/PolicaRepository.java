@@ -7,7 +7,7 @@ import java.security.SecureRandom;
 
 public interface PolicaRepository extends JpaRepository<Polica, Long> {
 
-    Polica findByNaziv(String naziv);
+    Polica findById(long id );
 
 
 
