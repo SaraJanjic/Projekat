@@ -1,9 +1,16 @@
-package com.example.demo.Model;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+@Entity
 public class StavkaPolice implements Serializable {
 
     @Id
@@ -12,23 +19,18 @@ public class StavkaPolice implements Serializable {
 
     @OneToMany(mappedBy = "stavkapolice", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name="recenzija_id")
-    private String recenzija;
+    private Set<Recenzija> recenzije = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name="knjiga_id")
     private Knjiga knjiga;
 
     public StavkaPolice(String recenzija, Knjiga knjiga) {
-        this.recenzija = recenzija;
         this.knjiga = knjiga;
     }
 
-    public String getRecenzija() {
-        return recenzija;
-    }
+    public StavkaPolice() {
 
-    public void setRecenzija(String recenzija) {
-        this.recenzija = recenzija;
     }
 
     public Knjiga getKnjiga() {
@@ -42,7 +44,7 @@ public class StavkaPolice implements Serializable {
     @Override
     public String toString() {
         return "StavkaPolice{" +
-                "recenzija='" + recenzija + '\'' +
+                "recenzije='" + recenzije + '\'' +
                 ", knjiga=" + knjiga +
                 '}';
     }

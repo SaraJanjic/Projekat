@@ -1,15 +1,17 @@
-package com.example.demo.Model;
+package com.example.demo.Entity;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-import java.awt.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Autor extends Korisnik{
+@Entity
+public class Autor extends Korisnik implements Serializable {
 
     @Column
     private boolean aktivnost;
@@ -17,9 +19,13 @@ public class Autor extends Korisnik{
     @OneToMany(mappedBy = "autor", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Knjiga> knjige = new HashSet<>();
 
-    public Autor(String ime, String prezime, String userName, String email, String lozinka, String datumRodjenja, String opis, Image slikaKorisnika, Uloga uloga, boolean aktivnost) {
-        super(ime, prezime, userName, email, lozinka, datumRodjenja, opis, slikaKorisnika, uloga);
+    public Autor(String ime, String prezime, String userName, String email, String lozinka, String datumRodjenja, String opis, Uloga uloga, boolean aktivnost) {
+        super(ime, prezime, userName, email, lozinka, datumRodjenja, opis, uloga);
         this.aktivnost = aktivnost;
+
+    }
+
+    public Autor() {
 
     }
 

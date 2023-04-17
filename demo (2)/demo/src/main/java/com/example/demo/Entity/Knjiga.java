@@ -1,10 +1,11 @@
-package com.example.demo.Model;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Knjiga implements Serializable {
 
     @Id
@@ -41,6 +42,10 @@ public class Knjiga implements Serializable {
         this.opis = opis;
         this.zanr = zanr;
         this.ocena = ocena;
+    }
+
+    public Knjiga() {
+
     }
 
     public String getNaslov() {

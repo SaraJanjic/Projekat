@@ -1,11 +1,21 @@
-package com.example.demo.Model;
+package com.example.demo.Entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.io.Serializable;
 import java.util.Date;
 
 enum Status{NA_CEKANJU, ODOBREN, ODBIJEN}
 
+@Entity
 public class Zahtev implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    private Long id;
 
     private String email;
 
@@ -15,6 +25,7 @@ public class Zahtev implements Serializable {
 
     private Date datumZahteva;
 
+
     public Zahtev(String email, String telefon, String poruka, Date datumZahteva) {
         this.email = email;
         this.telefon = telefon;
@@ -22,6 +33,9 @@ public class Zahtev implements Serializable {
         this.datumZahteva = datumZahteva;
     }
 
+    public Zahtev() {
+
+    }
 
     public String getEmail() {
         return email;
@@ -63,5 +77,13 @@ public class Zahtev implements Serializable {
                 ", poruka='" + poruka + '\'' +
                 ", datumZahteva=" + datumZahteva +
                 '}';
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }

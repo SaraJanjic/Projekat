@@ -1,10 +1,15 @@
-package com.example.demo.Model;
+package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.io.Serializable;
 import java.util.Date;
 
+@Entity
 public class Recenzija implements Serializable {
 
     @Id
@@ -26,6 +31,10 @@ public class Recenzija implements Serializable {
         this.tekst = tekst;
         this.datumRecenzije = datumRecenzije;
         this.korisnik = korisnik;
+    }
+
+    public Recenzija() {
+
     }
 
     public int getOcena() {

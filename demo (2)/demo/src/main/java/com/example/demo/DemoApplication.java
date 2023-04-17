@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.Model.Korisnik;
+import com.example.demo.Entity.Korisnik;
 import com.example.demo.Repository.KorisnikRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;

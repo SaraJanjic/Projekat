@@ -1,9 +1,13 @@
-package com.example.demo.Model;
+package com.example.demo.Entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.io.Serializable;
 
+@Entity
 public class Zanr implements Serializable {
 
     @Id
@@ -16,6 +20,9 @@ public class Zanr implements Serializable {
         this.nazivZanra = nazivZanra;
     }
 
+    public Zanr() {
+
+    }
 
     public String getNazivZanra() {
         return nazivZanra;
