@@ -11,7 +11,9 @@ import java.io.Serializable;
 enum Uloga{CITALAC, AUTOR, ADMINISTRATOR}
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Korisnik implements Serializable{
+
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -36,26 +38,12 @@ public class Korisnik implements Serializable{
     @Column
     private String opis;
 
-    //private Image slikaKorisnika;
+    @Column
+    private String slikaKorisnika;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private Uloga uloga;
-
-    public Korisnik(String ime, String prezime, String userName, String email, String lozinka, String datumRodjenja, String opis, Uloga uloga) {
-        this.ime = ime;
-        this.prezime = prezime;
-        this.userName = userName;
-        this.email = email;
-        this.lozinka = lozinka;
-        this.datumRodjenja = datumRodjenja;
-        this.opis = opis;
-        //this.slikaKorisnika = slikaKorisnika;
-        this.uloga = uloga;
-    }
-
-    public Korisnik() {
-
-    }
 
     public String getIme() {
         return ime;
@@ -121,7 +109,6 @@ public class Korisnik implements Serializable{
     public void setSlikaKorisnika(Image slikaKorisnika) {
         this.slikaKorisnika = slikaKorisnika;
     }
-*/
 
     public Uloga getUloga() {
         return uloga;
@@ -146,4 +133,5 @@ public class Korisnik implements Serializable{
                 ", uloga=" + uloga +
                 '}';
     }
+    */
 }

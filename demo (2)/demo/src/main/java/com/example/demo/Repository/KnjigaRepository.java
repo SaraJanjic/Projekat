@@ -6,7 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface KnjigaRepository extends JpaRepository<Knjiga, Long> {
-
-    Knjiga findKnjigaById(long id);
-
 }

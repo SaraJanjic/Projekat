@@ -6,9 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PolicaRepository extends JpaRepository<Polica, Long> {
-
-    Polica findById(long id );
-
-
-
 }

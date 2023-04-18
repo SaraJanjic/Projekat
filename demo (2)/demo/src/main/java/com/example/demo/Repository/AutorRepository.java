@@ -8,7 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AutorRepository extends JpaRepository<Korisnik, Long> {
 
-   Autor findAllBy(long id);
-
 }
 

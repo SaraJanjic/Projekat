@@ -6,7 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface StavkaPoliceRepository extends JpaRepository<StavkaPolice, Long> {
-
-
-    StavkaPolice findById(long id);
 }

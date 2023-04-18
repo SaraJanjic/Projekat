@@ -13,39 +13,22 @@ import java.util.Set;
 @Entity
 public class StavkaPolice implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
-
-    @OneToMany(mappedBy = "stavkapolice", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name="recenzija_id")
-    private Set<Recenzija> recenzije = new HashSet<>();
 
     @OneToOne
     @JoinColumn(name="knjiga_id")
     private Knjiga knjiga;
 
-    public StavkaPolice(String recenzija, Knjiga knjiga) {
-        this.knjiga = knjiga;
-    }
+    @OneToOne
+    @JoinColumn(name = "recenzija_id")
+    private Recenzija recenzija;
 
-    public StavkaPolice() {
+    @OneToOne
+    @JoinColumn(name = "polica_id")
+    private Polica polica;
 
-    }
 
-    public Knjiga getKnjiga() {
-        return knjiga;
-    }
-
-    public void setKnjiga(Knjiga knjiga) {
-        this.knjiga = knjiga;
-    }
-
-    @Override
-    public String toString() {
-        return "StavkaPolice{" +
-                "recenzije='" + recenzije + '\'' +
-                ", knjiga=" + knjiga +
-                '}';
-    }
 }

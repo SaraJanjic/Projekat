@@ -8,6 +8,7 @@ import java.util.Date;
 @Entity
 public class Knjiga implements Serializable {
 
+
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
@@ -22,31 +23,22 @@ public class Knjiga implements Serializable {
 
     private String opis;
 
+    private String naslovnaSlika;
+
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="zanr_id")
     private Zanr zanr;
 
+
     private Float ocena;
 
-    /*
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name="autor_id")
     private Autor autor;
-*/
 
-    public Knjiga(String naslov, int ISBN, Date datumObjavljivanja, int brStrana, String opis, Zanr zanr, Float ocena) {
-        this.naslov = naslov;
-        this.ISBN = ISBN;
-        this.datumObjavljivanja = datumObjavljivanja;
-        this.brStrana = brStrana;
-        this.opis = opis;
-        this.zanr = zanr;
-        this.ocena = ocena;
-    }
-
-    public Knjiga() {
-
-    }
+    /*
 
     public String getNaslov() {
         return naslov;
@@ -116,4 +108,6 @@ public class Knjiga implements Serializable {
                 ", ocena=" + ocena +
                 '}';
     }
+
+    */
 }

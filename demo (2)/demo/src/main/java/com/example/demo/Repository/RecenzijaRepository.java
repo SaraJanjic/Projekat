@@ -6,8 +6,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RecenzijaRepository extends JpaRepository<Recenzija, Long> {
-
-    Recenzija findByById(long id);
-
-
 }
