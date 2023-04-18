@@ -1,6 +1,7 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class Zahtev implements Serializable {
 
     private String poruka;
 
+    @DateTimeFormat
     private Date datumZahteva;
 
     @Column

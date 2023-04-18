@@ -5,8 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.lang.model.util.SimpleElementVisitor7;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.Stack;
 
 enum Uloga{CITALAC, AUTOR, ADMINISTRATOR}
 
@@ -33,7 +37,8 @@ public class Korisnik implements Serializable{
     private String lozinka;
 
     @Column
-    private String datumRodjenja;
+    @DateTimeFormat
+    private Date datumRodjenja;
 
     @Column
     private String opis;
@@ -45,93 +50,5 @@ public class Korisnik implements Serializable{
     @Enumerated(EnumType.STRING)
     private Uloga uloga;
 
-    public String getIme() {
-        return ime;
-    }
 
-    public void setIme(String ime) {
-        this.ime = ime;
-    }
-
-    public String getPrezime() {
-        return prezime;
-    }
-
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getLozinka() {
-        return lozinka;
-    }
-
-    public void setLozinka(String lozinka) {
-        this.lozinka = lozinka;
-    }
-
-    public String getDatumRodjenja() {
-        return datumRodjenja;
-    }
-
-    public void setDatumRodjenja(String datumRodjenja) {
-        this.datumRodjenja = datumRodjenja;
-    }
-
-    public String getOpis() {
-        return opis;
-    }
-
-    public void setOpis(String opis) {
-        this.opis = opis;
-    }
-
-    /*
-    public Image getSlikaKorisnika() {
-        return slikaKorisnika;
-    }
-
-    public void setSlikaKorisnika(Image slikaKorisnika) {
-        this.slikaKorisnika = slikaKorisnika;
-    }
-
-    public Uloga getUloga() {
-        return uloga;
-    }
-
-    public void setUloga(Uloga uloga) {
-        this.uloga = uloga;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Korisnik{" +
-                "ime='" + ime + '\'' +
-                ", prezime='" + prezime + '\'' +
-                ", userName='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", lozinka='" + lozinka + '\'' +
-                ", datumRodjenja=" + datumRodjenja +
-                ", opis='" + opis + '\'' +
-                //", slikaKorisnika=" + slikaKorisnika +
-                ", uloga=" + uloga +
-                '}';
-    }
-    */
 }
