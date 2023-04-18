@@ -22,18 +22,19 @@ public class Korisnik implements Serializable{
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
-    @Column
+    @Column(nullable = false)
     private String ime;
-    @Column
+
+    @Column(nullable = false)
     private String prezime;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String userName;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String lozinka;
 
     @Column

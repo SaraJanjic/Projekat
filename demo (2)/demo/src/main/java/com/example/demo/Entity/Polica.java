@@ -13,7 +13,6 @@ import java.util.Set;
 @Entity
 public class Polica implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     @JoinColumn(name="polica_id")

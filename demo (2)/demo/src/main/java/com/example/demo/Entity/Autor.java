@@ -9,7 +9,6 @@ import java.io.Serializable;
 @Entity
 public class Autor extends Korisnik implements Serializable {
 
-
     @Column
     private boolean aktivnost;
 

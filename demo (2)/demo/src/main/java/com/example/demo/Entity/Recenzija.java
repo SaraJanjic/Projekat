@@ -18,8 +18,10 @@ public class Recenzija implements Serializable {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private int ocena;
 
+    @Column
     private String tekst;
 
     @DateTimeFormat

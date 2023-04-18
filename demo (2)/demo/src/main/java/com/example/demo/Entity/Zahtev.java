@@ -16,10 +16,13 @@ public class Zahtev implements Serializable {
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String telefon;
 
+    @Column(nullable = false)
     private String poruka;
 
     @DateTimeFormat
