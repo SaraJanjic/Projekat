@@ -6,8 +6,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.io.Serializable;
 import java.util.Date;
 
-enum Status{NA_CEKANJU, ODOBREN, ODBIJEN}
-
 @Entity
 public class Zahtev implements Serializable {
 
@@ -32,5 +30,14 @@ public class Zahtev implements Serializable {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    public Zahtev(String email, String telefon, String poruka, Status status) {
+        this.email = email;
+        this.telefon = telefon;
+        this.poruka = poruka;
+        this.status = status;
+    }
 
+    public Zahtev() {
+
+    }
 }

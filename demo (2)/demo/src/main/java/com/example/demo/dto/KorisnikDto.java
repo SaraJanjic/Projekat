@@ -1,73 +1,65 @@
-package com.example.demo.Entity;
+package com.example.demo.dto;
 
+import com.example.demo.Entity.Korisnik;
+import com.example.demo.Entity.Polica;
+import com.example.demo.Entity.Uloga;
 import jakarta.persistence.*;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-public class Korisnik implements Serializable {
+public class KorisnikDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String ime;
 
-    @Column(nullable = false)
     private String prezime;
 
-    @Column(unique = true, nullable = false)
     private String userName;
 
-    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column(nullable = false)
     private String lozinka;
 
-    @Column
-    @DateTimeFormat
     private Date datumRodjenja;//Local date
 
-    @Column
     private String opis;
 
-    @Column
     private String slikaKorisnika;
 
-    @Column
-    @Enumerated(EnumType.STRING)
     private Uloga uloga;
 
-    //lista polica
-    @ManyToMany
-    @JoinTable(name = "police",
-            joinColumns = @JoinColumn(name = "polica_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "korisnik_id", referencedColumnName = "id"))
     private Set<Polica> korisnickePolice = new HashSet<>();
 
-
-    public Korisnik(String ime, String prezime, String userName, String email, String lozinka, String opis, String slikaKorisnika, Uloga uloga) {
+    public KorisnikDto(Long id, String ime, String prezime, String userName, String email, String lozinka, Date datumRodjenja, String opis, String slikaKorisnika, Uloga uloga, Set<Polica> korisnickePolice) {
+        this.id = id;
         this.ime = ime;
         this.prezime = prezime;
         this.userName = userName;
         this.email = email;
         this.lozinka = lozinka;
+        this.datumRodjenja = datumRodjenja;
         this.opis = opis;
         this.slikaKorisnika = slikaKorisnika;
         this.uloga = uloga;
+        this.korisnickePolice = korisnickePolice;
     }
 
-    public Korisnik() {
-
+    public KorisnikDto(Korisnik korisnik) {
+        this.id = korisnik.getId();
+        this.ime = korisnik.getIme();
+        this.prezime = korisnik.getPrezime();
+        this.userName = korisnik.getUserName();
+        this.email = korisnik.getEmail();
+        this.lozinka = korisnik.getLozinka();
+        this.datumRodjenja = korisnik.getDatumRodjenja();
+        this.opis = korisnik.getOpis();
+        this.slikaKorisnika = korisnik.getSlikaKorisnika();
+        this.uloga = korisnik.getUloga();
+        this.korisnickePolice = korisnik.getKorisnickePolice();
     }
 
     public Long getId() {

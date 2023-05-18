@@ -8,6 +8,7 @@ import jakarta.persistence.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,13 +25,17 @@ public class Recenzija implements Serializable {
     @Column
     private String tekst;
 
-    @DateTimeFormat
-    private Date datumRecenzije;
+    //@DateTimeFormat
+    private LocalDate datumRecenzije;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "korisnik_id")
     private Korisnik korisnik;
 
 
-
+    public Recenzija(int ocena, String tekst){ //LocalDate datumRecenzije) {
+        this.ocena = ocena;
+        this.tekst = tekst;
+        //this.datumRecenzije = datumRecenzije;
+    }
 }
