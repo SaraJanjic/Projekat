@@ -1,58 +1,49 @@
-package com.example.demo.Entity;
+package com.example.demo.dto;
 
-import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
+import com.example.demo.Entity.Autor;
+import com.example.demo.Entity.Knjiga;
+import com.example.demo.Entity.Zanr;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
-@Entity
-public class Knjiga implements Serializable {
-
-
-    @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+public class KnjigaDto {
     private Long id;
-
     private String naslov;
-
-    //string
-    private String ISBN;
-
-
+    private String isbn;
     private LocalDate datumObjavljivanja;
-
     private int brStrana;
-
     private String opis;
-
     private String naslovnaSlika;
-
-
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="zanr_id")
     private Zanr zanr;
-
     private Double ocena;//double
-
-
-    @ManyToOne
-    @JoinColumn(name="autor_id")
     private Autor autor;
 
-
-    public Knjiga(String naslov, String ISBN, int brStrana, String opis, String naslovnaSlika, Double ocena) {
+    public KnjigaDto(Long id, String naslov, String isbn, LocalDate datumObjavljivanja, int brStrana, String opis, String naslovnaSlika, Zanr zanr, Double ocena, Autor autor) {
+        this.id = id;
         this.naslov = naslov;
-        this.ISBN = ISBN;
+        this.isbn = isbn;
+        this.datumObjavljivanja = datumObjavljivanja;
         this.brStrana = brStrana;
         this.opis = opis;
         this.naslovnaSlika = naslovnaSlika;
+        this.zanr = zanr;
         this.ocena = ocena;
+        this.autor = autor;
     }
 
-    public Knjiga() {
-
+    public KnjigaDto(Knjiga k) {
+        this.id = k.getId();
+        this.naslov = k.getNaslov();
+        this.isbn = k.getISBN();
+        this.datumObjavljivanja = k.getDatumObjavljivanja();
+        this.brStrana = k.getBrStrana();
+        this.opis = k.getOpis();
+        this.naslovnaSlika = k.getNaslovnaSlika();
+        this.zanr = k.getZanr();
+        this.ocena = k.getOcena();
+        this.autor = k.getAutor();
     }
 
     public Long getId() {
@@ -71,12 +62,12 @@ public class Knjiga implements Serializable {
         this.naslov = naslov;
     }
 
-    public String getISBN() {
-        return ISBN;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setISBN(String ISBN) {
-        this.ISBN = ISBN;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
 
     public LocalDate getDatumObjavljivanja() {

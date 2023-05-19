@@ -38,4 +38,44 @@ public class Recenzija implements Serializable {
         this.tekst = tekst;
         //this.datumRecenzije = datumRecenzije;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getOcena() {
+        return ocena;
+    }
+
+    public void setOcena(int ocena) {
+        this.ocena = ocena;
+    }
+
+    public String getTekst() {
+        return tekst;
+    }
+
+    public void setTekst(String tekst) {
+        this.tekst = tekst;
+    }
+
+    public LocalDate getDatumRecenzije() {
+        return datumRecenzije;
+    }
+
+    public void setDatumRecenzije(LocalDate datumRecenzije) {
+        this.datumRecenzije = datumRecenzije;
+    }
+
+    public Korisnik getKorisnik() {
+        return korisnik;
+    }
+
+    public void setKorisnik(Korisnik korisnik) {
+        this.korisnik = korisnik;
+    }
 }

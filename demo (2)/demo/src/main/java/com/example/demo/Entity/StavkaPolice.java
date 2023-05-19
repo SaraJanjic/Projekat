@@ -39,6 +39,10 @@ public class StavkaPolice implements Serializable {
         this.recenzija = recenzija;
     }
 
+    public StavkaPolice() {
+
+    }
+
     public Long getId() {
         return id;
     }
