@@ -22,7 +22,7 @@ public class KorisnikDto {
 
     private String email;
 
-    private String lozinka;
+    private String lozinka; //mislim da ne treba u dto?
 
     private Date datumRodjenja;//Local date
 

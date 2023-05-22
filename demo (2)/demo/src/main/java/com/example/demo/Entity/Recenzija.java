@@ -39,6 +39,10 @@ public class Recenzija implements Serializable {
         //this.datumRecenzije = datumRecenzije;
     }
 
+    public Recenzija() {
+
+    }
+
     public Long getId() {
         return id;
     }

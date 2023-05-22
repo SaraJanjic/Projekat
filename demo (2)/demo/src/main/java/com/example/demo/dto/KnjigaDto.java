@@ -9,9 +9,9 @@ import jakarta.persistence.ManyToOne;
 import java.time.LocalDate;
 
 public class KnjigaDto {
-    private Long id;
+    private Long id; //da li treba
     private String naslov;
-    private String isbn;
+    private String isbn; //da li treba
     private LocalDate datumObjavljivanja;
     private int brStrana;
     private String opis;

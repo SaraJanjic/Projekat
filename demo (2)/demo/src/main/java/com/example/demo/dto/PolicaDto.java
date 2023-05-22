@@ -20,4 +20,28 @@ public class PolicaDto {
         this.naziv = p.getNaziv();
         this.oznakaPolice = p.getOznakaPolice();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
+    public Boolean getOznakaPolice() {
+        return oznakaPolice;
+    }
+
+    public void setOznakaPolice(Boolean oznakaPolice) {
+        this.oznakaPolice = oznakaPolice;
+    }
 }
