@@ -26,13 +26,13 @@ public class StavkaPolice implements Serializable {
     @JoinColumn(name = "recenzija_id")
     private Recenzija recenzija;
 
-    @ManyToMany
-    //@JoinColumn(name = "polica_id")
-    @JoinTable(name = "police",
-            joinColumns = @JoinColumn(name = "polica_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "stavkaPolice_id", referencedColumnName = "id"))
-    //private Polica polica;
-    private Set<Polica> police = new HashSet<>();
+//    @ManyToMany
+//    //@JoinColumn(name = "polica_id")
+//    @JoinTable(name = "police",
+//            joinColumns = @JoinColumn(name = "polica_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "stavkaPolice_id", referencedColumnName = "id"))
+//    //private Polica polica;
+//    private Set<Polica> police = new HashSet<>();
 
     public StavkaPolice(Knjiga knjiga, Recenzija recenzija) {
         this.knjiga = knjiga;
@@ -67,11 +67,11 @@ public class StavkaPolice implements Serializable {
         this.recenzija = recenzija;
     }
 
-    public Set<Polica> getPolice() {
-        return police;
-    }
-
-    public void setPolice(Set<Polica> police) {
-        this.police = police;
-    }
+//    public Set<Polica> getPolice() {
+//        return police;
+//    }
+//
+//    public void setPolice(Set<Polica> police) {
+//        this.police = police;
+//    }
 }

@@ -6,36 +6,22 @@ import com.example.demo.Entity.Recenzija;
 import java.time.LocalDate;
 
 public class RecenzijaDto {
-    private Long id;
     private int ocena;
     private String tekst;
     private LocalDate datum;
-    private Korisnik korisnik;
 
-    public RecenzijaDto(Long id, int ocena, String tekst, LocalDate datum, Korisnik korisnik) {
-        this.id = id;
+    public RecenzijaDto(int ocena, String tekst, LocalDate datum) {
         this.ocena = ocena;
         this.tekst = tekst;
         this.datum = datum;
-        this.korisnik = korisnik;
     }
 
     public RecenzijaDto(Recenzija r) {
-        this.id = r.getId();
         this.ocena = r.getOcena();
         this.tekst = r.getTekst();
         this.datum = r.getDatumRecenzije();
-        this.korisnik = r.getKorisnik();
 
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public int getOcena() {
@@ -60,13 +46,5 @@ public class RecenzijaDto {
 
     public void setDatum(LocalDate datum) {
         this.datum = datum;
-    }
-
-    public Korisnik getKorisnik() {
-        return korisnik;
-    }
-
-    public void setKorisnik(Korisnik korisnik) {
-        this.korisnik = korisnik;
     }
 }

@@ -9,8 +9,6 @@ import java.time.LocalDate;
 
 public class RegistracijaDto {
 
-    private Long id;
-
     private String ime;
 
     private String prezime;
@@ -27,14 +25,6 @@ public class RegistracijaDto {
         this.email = email;
         this.userName = userName;
         this.lozinka = lozinka;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getIme() {

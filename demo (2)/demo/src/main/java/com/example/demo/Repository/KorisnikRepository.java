@@ -12,4 +12,7 @@ public interface KorisnikRepository extends JpaRepository<Korisnik, Long> {
 
     Optional<Korisnik> findById(Long id);
 
+    Optional<Korisnik> findByUserName(String username);
+    Optional<Korisnik> findByEmail(String email);
+
 }

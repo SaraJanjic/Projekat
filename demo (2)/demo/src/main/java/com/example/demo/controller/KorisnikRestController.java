@@ -4,21 +4,21 @@ import com.example.demo.Entity.Knjiga;
 import com.example.demo.Entity.Korisnik;
 import com.example.demo.dto.KorisnikDto;
 import com.example.demo.dto.LoginDto;
-import com.example.demo.servis.KorisnikService;
+import com.example.demo.dto.RegistracijaDto;
+import com.example.demo.service.KorisnikService;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@RestController
 public class KorisnikRestController {
 
-        // @Autowired
+        @Autowired
         private KorisnikService korisnikService;
 
         @GetMapping("/api/")
@@ -26,8 +26,13 @@ public class KorisnikRestController {
             return "Hello from api!";
         }
 
+        @PostMapping("/api/register")
+        public ResponseEntity register(@RequestBody RegistracijaDto dto) {
+            return korisnikService.register(dto);
+        }
+
         @PostMapping("api/login")
-        public ResponseEntity<String> login(@RequestBody LoginDto loginDto, HttpSession session){
+        public ResponseEntity login(@RequestBody LoginDto loginDto, HttpSession session){
             // proverimo da li su podaci validni
             if(loginDto.getEmail().isEmpty() || loginDto.getPassword().isEmpty())
                 return new ResponseEntity("Invalid login data", HttpStatus.BAD_REQUEST);
@@ -37,7 +42,7 @@ public class KorisnikRestController {
                 return new ResponseEntity<>("User does not exist!", HttpStatus.NOT_FOUND);
 
             session.setAttribute("korisnik", loggedKorisnik);
-            return ResponseEntity.ok("Successfully logged in!");
+            return new ResponseEntity(loggedKorisnik.getKorisnickePolice(), HttpStatus.OK);
         }
 
         @PostMapping("api/logout")
@@ -71,11 +76,15 @@ public class KorisnikRestController {
         }
 
         @GetMapping("/api/korisnik/{id}")
-        public Korisnik getKorisnik(@PathVariable(name = "id") Long id, HttpSession session){
-            Korisnik korisnik = (Korisnik) session.getAttribute("user");
-            System.out.println(korisnik.getUserName()); //getIme
-            session.invalidate();
-            return korisnikService.findOne(id);
+        public ResponseEntity getKorisnik(@PathVariable(name = "id") Long id, HttpSession session){
+            Korisnik korisnik = (Korisnik) session.getAttribute("korisnik");
+            if (korisnik == null)
+                return new ResponseEntity("Niste prijavljeni", HttpStatus.FORBIDDEN);
+            else {
+                System.out.println(korisnik.getUserName()); //getIme
+                session.invalidate();
+                return new ResponseEntity(korisnikService.findOne(id), HttpStatus.OK);
+            }
         }
       /* @GetMapping("api/knjiga/{naziv}")
         public Knjiga getKnjiga(@PathVariable(name = "naziv") String naslov, HttpSession session) {
@@ -89,6 +98,27 @@ public class KorisnikRestController {
         public String saveKorisnik(@RequestBody Korisnik korisnik) {
             this.korisnikService.save(korisnik);
             return "Successfully saved a user!";
+        }
+
+        @PostMapping("/api/search")
+        public ResponseEntity search(@RequestParam String q, @RequestParam(required = false, defaultValue = "books") String search_type) {
+//            switch (search_type) {
+//                case "books":
+//                    Set<Knjiga> knjige = new HashSet<>();
+//                    knjizice = knjigaService.findAll();
+//                    for (Knjiga k : knjizice) {
+//
+//                    }
+//                    return new ResponseEntity(knjige, HttpStatus.OK);
+//                    break;
+//                case "people":
+//                    break;
+//                default:
+//                    return new ResponseEntity("Nepostojeci tip pretrage", HttpStatus.BAD_REQUEST);
+//            }
+//        }
+
+            return new ResponseEntity(q + " " + search_type, HttpStatus.OK);
         }
     }
 
