@@ -4,8 +4,11 @@ import com.example.demo.Entity.Knjiga;
 import com.example.demo.Entity.Korisnik;
 import com.example.demo.dto.KorisnikDto;
 import com.example.demo.dto.LoginDto;
+import com.example.demo.dto.PolicaDto;
 import com.example.demo.dto.RegistracijaDto;
+import com.example.demo.service.KnjigaService;
 import com.example.demo.service.KorisnikService;
+import com.example.demo.service.PolicaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,13 +16,21 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 public class KorisnikRestController {
 
         @Autowired
         private KorisnikService korisnikService;
+
+        @Autowired
+        private KnjigaService knjigaService;
+
+        @Autowired
+        private PolicaService policaService;
 
         @GetMapping("/api/")
         public String welcome(){
@@ -100,26 +111,25 @@ public class KorisnikRestController {
             return "Successfully saved a user!";
         }
 
-        @PostMapping("/api/search")
-        public ResponseEntity search(@RequestParam String q, @RequestParam(required = false, defaultValue = "books") String search_type) {
-//            switch (search_type) {
-//                case "books":
-//                    Set<Knjiga> knjige = new HashSet<>();
-//                    knjizice = knjigaService.findAll();
-//                    for (Knjiga k : knjizice) {
+        //@PostMapping("/api/search")
+        //public ResponseEntity search(@RequestParam String q, @RequestParam(required = false, defaultValue = "books") String search_type) {
+            //switch (search_type) {
+            //   case "books":
+            //       Set<Knjiga> knjige = new HashSet<>();
+            //        Knjiga knjiga  = KnjigaService.findOne(q);
+            //        //for (Knjiga k : knjizice) {
 //
-//                    }
-//                    return new ResponseEntity(knjige, HttpStatus.OK);
-//                    break;
-//                case "people":
-//                    break;
-//                default:
-//                    return new ResponseEntity("Nepostojeci tip pretrage", HttpStatus.BAD_REQUEST);
-//            }
-//        }
+            //        //}
+            //        return new ResponseEntity(knjige, HttpStatus.OK);
+            //        break;
+            //    case "people":
+            //        break;
+            //    default:
+            //        return new ResponseEntity("Nepostojeci tip pretrage", HttpStatus.BAD_REQUEST);
 
-            return new ResponseEntity(q + " " + search_type, HttpStatus.OK);
-        }
+            //}
+           // return new ResponseEntity(q + " " + search_type, HttpStatus.OK);
+
     }
 
 

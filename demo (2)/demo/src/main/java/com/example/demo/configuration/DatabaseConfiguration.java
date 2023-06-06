@@ -120,6 +120,14 @@ public class DatabaseConfiguration {
         korisnik.setUserName("admin");
         korisnik.setUloga(Uloga.ADMINISTRATOR);
         korisnikRepository.save(korisnik);
+
+        Knjiga knjiga=new Knjiga();
+        knjiga.setNaslov("avlija");
+        knjigaRepository.save(knjiga);
+
+
+
+
         return true;
     }
 

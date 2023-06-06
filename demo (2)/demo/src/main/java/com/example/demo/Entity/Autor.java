@@ -16,4 +16,8 @@ public class Autor extends Korisnik implements Serializable {
         super(ime, prezime, userName, email, lozinka, opis, slikaKorisnika, uloga);
         this.aktivnost = aktivnost;
     }
+
+    public Autor() {
+        
+    }
 }

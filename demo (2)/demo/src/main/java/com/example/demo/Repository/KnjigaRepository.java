@@ -9,6 +9,6 @@ import java.util.Optional;
 
 @Repository
 public interface KnjigaRepository extends JpaRepository<Knjiga, Long> {
-    Optional<Knjiga> findByNaslov(String naslov);
+    Knjiga findByNaslov(String naslov);
 
 }

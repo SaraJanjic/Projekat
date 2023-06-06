@@ -7,9 +7,9 @@ public class PolicaDto {
 
     private String  naziv;
 
-    private Boolean oznakaPolice;
+    private boolean oznakaPolice;
 
-    public PolicaDto(Long id, String naziv, Boolean oznakaPolice) {
+    public PolicaDto(String naziv, Boolean oznakaPolice) {
         this.id = id;
         this.naziv = naziv;
         this.oznakaPolice = oznakaPolice;
@@ -21,14 +21,6 @@ public class PolicaDto {
         this.oznakaPolice = p.getOznakaPolice();
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getNaziv() {
         return naziv;
     }
@@ -37,11 +29,4 @@ public class PolicaDto {
         this.naziv = naziv;
     }
 
-    public Boolean getOznakaPolice() {
-        return oznakaPolice;
-    }
-
-    public void setOznakaPolice(Boolean oznakaPolice) {
-        this.oznakaPolice = oznakaPolice;
-    }
 }

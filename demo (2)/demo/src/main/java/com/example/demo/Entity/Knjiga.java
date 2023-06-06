@@ -1,11 +1,9 @@
 package com.example.demo.Entity;
 
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Knjiga implements Serializable {
@@ -131,7 +129,7 @@ public class Knjiga implements Serializable {
         return autor;
     }
 
-    public void setAutor(Autor autor) {
+    public void setAutor() {
         this.autor = autor;
     }
 }
