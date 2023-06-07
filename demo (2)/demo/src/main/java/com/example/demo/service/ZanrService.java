@@ -24,4 +24,6 @@ public class ZanrService {
     public Zanr save(Zanr zanr){
         return zanrRepository.save(zanr);
     }
+
+
 }

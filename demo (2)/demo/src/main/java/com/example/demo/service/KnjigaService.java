@@ -5,6 +5,7 @@ import com.example.demo.Repository.KnjigaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,6 +13,10 @@ public class KnjigaService {
 
     @Autowired
     private static KnjigaRepository knjigaRepository;
+
+    public List<Knjiga> nadjiSveKnjige(){
+        return  knjigaRepository.findAll();
+    }
 
     /*public static Knjiga findOne(String naziv){
         Optional<Knjiga> foundKnjiga = knjigaRepository.findByNaslov(naziv);

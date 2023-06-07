@@ -20,6 +20,7 @@ public class KnjigaDto {
     private Double ocena;//double
     private Autor autor;
 
+
     public KnjigaDto(Long id, String naslov, String isbn, LocalDate datumObjavljivanja, int brStrana, String opis, String naslovnaSlika, Zanr zanr, Double ocena, Autor autor) {
         this.id = id;
         this.naslov = naslov;
@@ -125,4 +126,5 @@ public class KnjigaDto {
     public void setAutor(Autor autor) {
         this.autor = autor;
     }
+
 }

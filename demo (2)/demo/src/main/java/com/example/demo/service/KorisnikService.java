@@ -74,5 +74,34 @@ public class KorisnikService {
         return  korisnik;
     }
 
+    public boolean dodajPolicuKorisniku(Long id, String imePolice){
+        List<Korisnik> korisnici = korisnikRepository.findAll();
+        for(Korisnik user : korisnici){
+            if(user.getId() == id){
+                Set<Polica> police = user.getKorisnickePolice();
+                police.add(policaService.napraviPolicu(imePolice));
+                user.setKorisnickePolice(police);
+                korisnikRepository.save(user);
+            }
+        }
+        return true;
+    }
+
+    public Polica izbrisiPolicu(Long id, String naziv){
+        List<Korisnik> korisnici = korisnikRepository.findAll();
+        for(Korisnik user : korisnici){
+            if(user.getId() == id){
+                Set<Polica> police = user.getKorisnickePolice();
+                for(Polica polica : police){
+                    if(polica.getNaziv().equals(naziv) && polica.getOznakaPolice()==false){
+                        user.getKorisnickePolice().remove(polica);
+                        return  polica;
+                    }
+                }
+            }
+        }
+        return  null;
+    }
+
 
 }

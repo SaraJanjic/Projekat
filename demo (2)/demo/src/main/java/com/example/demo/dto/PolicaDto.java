@@ -3,22 +3,22 @@ package com.example.demo.dto;
 import com.example.demo.Entity.Polica;
 
 public class PolicaDto {
-    private Long id;
+    //private Long id;
 
     private String  naziv;
 
-    private boolean oznakaPolice;
+    //private boolean oznakaPolice;
 
     public PolicaDto(String naziv, Boolean oznakaPolice) {
-        this.id = id;
+        //this.id = id;
         this.naziv = naziv;
-        this.oznakaPolice = oznakaPolice;
+        //this.oznakaPolice = oznakaPolice;
     }
 
     public PolicaDto(Polica p) {
-        this.id = p.getId();
+        //this.id = p.getId();
         this.naziv = p.getNaziv();
-        this.oznakaPolice = p.getOznakaPolice();
+        //this.oznakaPolice = p.getOznakaPolice();
     }
 
     public String getNaziv() {

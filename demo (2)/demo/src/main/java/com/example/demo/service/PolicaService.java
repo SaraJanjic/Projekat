@@ -44,7 +44,7 @@ public class PolicaService {
     public Polica save(Polica polica){ return policaRepository.save(polica);
     }
 
-    public Polica kreirajPolicu(String naziv) {
+    public Polica kreirajPolicu(String naziv) { //radi
         Polica polica = new Polica();
         polica.setNaziv(naziv);
         polica.setOznakaPolice(true);
@@ -52,46 +52,20 @@ public class PolicaService {
         return polica;
     }
 
-/*
-    public Police napraviPolicu(PolicaDto dto) {
 
-        if (policaRepository.findByNaziv(dto.getNaziv()).isPresent()) {
-            return new ResponseEntity("Vec postoji ta polica.", HttpStatus.BAD_REQUEST);
-        }
-
-        if (dto.getNaziv() == null)
-            return new ResponseEntity("Fali vam neko polje.", HttpStatus.BAD_REQUEST);
-
-        Polica polica = new Polica();
-        polica.setNaziv(dto.getNaziv());
-        polica.setOznakaPolice(false);
-
-        policaRepository.save(polica);
-        return new ResponseEntity("Uspesno pravljenje police.", HttpStatus.OK);
-    }
-*/
-    public String deletePolica(String naziv) {
+    public boolean brisiPolicu(String naziv) { //radi
         Optional<Polica> policaO = policaRepository.findByNaziv(naziv);
             if(policaO.isPresent()){
                 Polica polica = policaO.get();
                 policaRepository.delete(polica);
-                return "Polica je obrisana.";
+                return true;
              }else{
                 //throw new PolicaNotFoundException("POlica nije nadjena." + naziv);
-                return "Polica ne postoji.";
+                return false;
             }
         }
 
-        /*
-    public Polica napraviPolicu(PolicaDto policaDto){
-        Polica polica = new Polica();
-        polica.setNaziv(policaDto.getNaziv());
-        polica.setOznakaPolice(false);
-        return policaRepository.save(polica);
-    }
-    */
-
-    public Polica napraviPolicu(String name){
+    public Polica napraviPolicu(String name){ //radi
         Optional<Polica> postojecaPolica = policaRepository.findByNaziv(name);
         if(postojecaPolica.isPresent()){
             return  null;
@@ -102,22 +76,22 @@ public class PolicaService {
         return policaRepository.save(polica);
     }
 
-    public boolean dodajKnjiguNaPolicu(String name, String naziv){
-        Knjiga knjiga = knjigaRepository.findByNaslov(name);
+    public boolean dodajKnjiguNaPolicu(String nazivPolice, String naslovKnjige){ //ne radi
+        Knjiga knjiga = knjigaRepository.findByNaslov(naslovKnjige);
             if(knjiga==null){
                 return false;
             }
-            Optional<Polica> polica=policaRepository.findByNaziv(naziv);
+            Polica polica=policaRepository.findByNaziv(nazivPolice).get();
             if(polica==null){
                 return false;
             }
 
-        if(polica.get().getOznakaPolice() == true && polica.get().getKnjige().contains(knjiga)){
+        if(polica.getOznakaPolice() == true && polica.getKnjige().contains(knjiga)){
             return false;
         }
 
-    polica.get().getKnjige().add(knjiga);
-    policaRepository.save(polica.get());
+    polica.getKnjige().add(knjiga);
+    policaRepository.save(polica);
     return true;
     }
 
