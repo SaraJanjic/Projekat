@@ -10,5 +10,6 @@ import java.util.Optional;
 @Repository
 public interface AutorRepository extends JpaRepository<Korisnik, Long> {
     Optional<Autor> findByUserName(String username);
+    Optional<Korisnik> findById(Long id);
 }
 

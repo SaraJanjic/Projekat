@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.Entity.Knjiga;
 import com.example.demo.Entity.Korisnik;
+import com.example.demo.Repository.KorisnikRepository;
 import com.example.demo.dto.KorisnikDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.RegistracijaDto;
@@ -20,6 +21,16 @@ public class KorisnikRestController {
 
         @Autowired
         private KorisnikService korisnikService;
+    private final KorisnikRepository korisnikRepository;
+
+    public KorisnikRestController(KorisnikRepository korisnikRepository) {
+        this.korisnikRepository = korisnikRepository;
+    }
+
+    @GetMapping
+    public List<Korisnik> pregledajSveKorisnike() {
+        return korisnikRepository.findAll();
+    }
 
         @GetMapping("/api/")
         public String welcome(){
