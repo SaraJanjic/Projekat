@@ -16,6 +16,10 @@ public class ZanrDto {
         NazivZanra = zanr.getNazivZanra();
     }
 
+    public ZanrDto() {
+
+    }
+
     public Long getId() {
         return id;
     }

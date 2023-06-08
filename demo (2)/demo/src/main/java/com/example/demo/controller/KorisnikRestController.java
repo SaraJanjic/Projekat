@@ -27,7 +27,7 @@ public class KorisnikRestController {
         this.korisnikRepository = korisnikRepository;
     }
 
-    @GetMapping
+    @GetMapping("/korisnici")
     public List<Korisnik> pregledajSveKorisnike() {
         return korisnikRepository.findAll();
     }
