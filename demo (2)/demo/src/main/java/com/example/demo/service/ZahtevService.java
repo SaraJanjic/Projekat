@@ -4,10 +4,11 @@ import com.example.demo.Entity.Korisnik;
 import com.example.demo.Entity.Zahtev;
 import com.example.demo.Entity.Zanr;
 import com.example.demo.Repository.ZahtevRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class ZahtevService {
     private ZahtevRepository zahtevRepository;
     public Zahtev findOne(Long id){

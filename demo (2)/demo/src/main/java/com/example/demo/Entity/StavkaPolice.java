@@ -13,7 +13,6 @@ import java.util.Set;
 @Entity
 public class StavkaPolice implements Serializable {
 
-
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
     private Long id;

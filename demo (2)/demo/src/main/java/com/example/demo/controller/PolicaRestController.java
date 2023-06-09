@@ -13,15 +13,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 //@RequestMapping("/police")
 public class PolicaRestController {
 
     @Autowired
     private PolicaService policaService;
-
     @Autowired
+
     private KorisnikService korisnikService;
+
+    private  PolicaRepository policaRepository;
+
+    public PolicaRestController(PolicaRepository policaRepository) {
+        this.policaRepository = policaRepository;
+    }
+
+    @GetMapping
+    public List<Polica> pregledajSvePolice() {
+        return policaRepository.findAll();
+    }
+
 
 
     public PolicaRestController() {
@@ -74,9 +88,9 @@ public class PolicaRestController {
         }
 
     }
-
+/*
 @PostMapping("/dodajKnjiuNaPolicu/{nazivPolice}/{naslovKnjige}")
-    public ResponseEntity<String> dodajKnjiguNaPolicu(@PathVariable String nazivPolice, @PathVariable String naslovKnjige){
+    public ResponseEntity<String> dodajKnjiguNaPolicu(@PathVariable(name = "nazivPolice") String nazivPolice, @PathVariable(name = "naslovKnjige") String naslovKnjige){
         boolean uspesno= policaService.dodajKnjiguNaPolicu(nazivPolice,naslovKnjige);
         if(uspesno){
             return ResponseEntity.ok("Knjiga dodata na policu");
@@ -84,6 +98,6 @@ public class PolicaRestController {
             return ResponseEntity.badRequest().body("Neuspesno dodavanje");
         }
 }
-
+*/
 
 }

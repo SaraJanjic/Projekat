@@ -22,20 +22,17 @@ public class Polica implements Serializable {
     private String  naziv;
 
     private Boolean oznakaPolice;
-    @ManyToMany
-    private List<Knjiga> knjige;
+    //@ManyToMany
+    //private List<Knjiga> knjige;
 
-    public List<Knjiga> getKnjige() {
-        return knjige;
-    }
+    @ManyToOne
+    StavkaPolice stavkaPolice;
 
-    public void setKnjige(List<Knjiga> knjige) {
-        this.knjige = knjige;
-    }
-
-    public Polica(String naziv, Boolean oznakaPolice) {
+    public Polica(Long id, String naziv, Boolean oznakaPolice, StavkaPolice stavkaPolice) {
+        this.id = id;
         this.naziv = naziv;
         this.oznakaPolice = oznakaPolice;
+        this.stavkaPolice = stavkaPolice;
     }
 
     public Polica() {
@@ -64,5 +61,13 @@ public class Polica implements Serializable {
 
     public void setOznakaPolice(Boolean oznakaPolice) {
         this.oznakaPolice = oznakaPolice;
+    }
+
+    public StavkaPolice getStavkaPolice() {
+        return stavkaPolice;
+    }
+
+    public void setStavkaPolice(StavkaPolice stavkaPolice) {
+        this.stavkaPolice = stavkaPolice;
     }
 }

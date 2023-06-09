@@ -3,11 +3,13 @@ package com.example.demo.service;
 import com.example.demo.Entity.Autor;
 import com.example.demo.Entity.Korisnik;
 import com.example.demo.Repository.AutorRepository;
+import org.springframework.stereotype.Service;
 
 import java.security.AuthProvider;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AutorService {
     private AutorRepository autorRepository;
 

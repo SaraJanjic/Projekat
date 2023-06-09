@@ -62,6 +62,10 @@ public class KorisnikDto {
         this.korisnickePolice = korisnik.getKorisnickePolice();
     }
 
+    public KorisnikDto() {
+
+    }
+
     public Long getId() {
         return id;
     }

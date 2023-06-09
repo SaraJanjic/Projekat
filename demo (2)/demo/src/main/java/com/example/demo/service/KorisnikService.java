@@ -103,5 +103,12 @@ public class KorisnikService {
         return  null;
     }
 
+   public Korisnik findByEmail(String email) {
+        return korisnikRepository.findByEmail(email).get();
+    }
 
+
+    public Korisnik findById(Long id) {
+        return  korisnikRepository.findById(id).get();
+    }
 }

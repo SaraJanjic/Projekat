@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.Entity.Knjiga;
 import com.example.demo.Entity.Korisnik;
+import com.example.demo.Repository.KorisnikRepository;
 import com.example.demo.dto.KorisnikDto;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.PolicaDto;
@@ -23,8 +24,18 @@ import java.util.Set;
 @RestController
 public class KorisnikRestController {
 
-        @Autowired
-        private KorisnikService korisnikService;
+    @Autowired
+    private KorisnikService korisnikService;
+    private final KorisnikRepository korisnikRepository;
+
+    public KorisnikRestController(KorisnikRepository korisnikRepository) {
+        this.korisnikRepository = korisnikRepository;
+    }
+
+    @GetMapping("/korisnici")
+    public List<Korisnik> pregledajSveKorisnike() {
+        return korisnikRepository.findAll();
+    }
 
         @Autowired
         private KnjigaService knjigaService;
@@ -78,7 +89,7 @@ public class KorisnikRestController {
                 System.out.println(loggedKorisnik);
             }
 
-            List<KorisnikDto> dtos = new ArrayList<>(); //objasniti
+            List<KorisnikDto> dtos = new ArrayList<>();
             for(Korisnik korisnik : korisnikList){
                 KorisnikDto dto = new KorisnikDto(korisnik);
                 dtos.add(dto);

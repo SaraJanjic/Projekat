@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -96,6 +97,7 @@ public class DatabaseConfiguration {
 //
 //        stavkaPoliceRepository.save(stavkaPolice);
 
+        /*
         Korisnik korisnik = new Korisnik();
         korisnik.setIme("admin");
         korisnik.setPrezime("admin");
@@ -120,14 +122,7 @@ public class DatabaseConfiguration {
         korisnik.setUserName("admin");
         korisnik.setUloga(Uloga.ADMINISTRATOR);
         korisnikRepository.save(korisnik);
-
-        Knjiga knjiga=new Knjiga();
-        knjiga.setNaslov("avlija");
-        knjigaRepository.save(knjiga);
-
-
-
-
+        */
         return true;
     }
 

@@ -76,6 +76,7 @@ public class PolicaService {
         return policaRepository.save(polica);
     }
 
+/*
     public boolean dodajKnjiguNaPolicu(String nazivPolice, String naslovKnjige){ //ne radi
         Knjiga knjiga = knjigaRepository.findByNaslov(naslovKnjige);
             if(knjiga==null){
@@ -86,13 +87,14 @@ public class PolicaService {
                 return false;
             }
 
-        if(polica.getOznakaPolice() == true && polica.getKnjige().contains(knjiga)){
+        if(polica.getOznakaPolice() == true && polica.getStavkaPolice().getKnjiga().getNaslov().equals(naslovKnjige)){
             return false;
         }
 
-    polica.getKnjige().add(knjiga);
+    polica.getStavkaPolice().setKnjiga(knjiga);
     policaRepository.save(polica);
     return true;
     }
+*/
 
 }
