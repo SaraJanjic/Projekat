@@ -25,6 +25,9 @@ public class Polica implements Serializable {
     //@ManyToMany
     //private List<Knjiga> knjige;
 
+
+
+
     @ManyToOne
     StavkaPolice stavkaPolice;
 
