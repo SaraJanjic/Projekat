@@ -10,6 +10,8 @@ import java.util.Optional;
 public interface ZahtevZaAktivacijuAutoraRepository extends JpaRepository<ZahtevZaAktivacijuAutora, Long> {
     Optional<ZahtevZaAktivacijuAutora> findById(Long id);
 
+    Optional<ZahtevZaAktivacijuAutora> findByStatus(String status);
+
 }
 
 

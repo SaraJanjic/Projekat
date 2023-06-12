@@ -16,26 +16,26 @@ import java.util.Set;
 public class Polica implements Serializable {
 
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String  naziv;
+    private String naziv;
 
     private Boolean oznakaPolice;
     //@ManyToMany
     //private List<Knjiga> knjige;
 
+    @ManyToMany
+    @JoinTable(name = "stavke",
+            joinColumns = @JoinColumn(name = "stavka_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "polica_id", referencedColumnName = "id"))
+    private Set<StavkaPolice> stavke = new HashSet<>();
 
-
-
-    @ManyToOne
-    StavkaPolice stavkaPolice;
-
-    public Polica(Long id, String naziv, Boolean oznakaPolice, StavkaPolice stavkaPolice) {
+    public Polica(Long id, String naziv, Boolean oznakaPolice, Set<StavkaPolice> stavke) {
         this.id = id;
         this.naziv = naziv;
         this.oznakaPolice = oznakaPolice;
-        this.stavkaPolice = stavkaPolice;
+        this.stavke = stavke;
     }
 
     public Polica() {
@@ -66,11 +66,11 @@ public class Polica implements Serializable {
         this.oznakaPolice = oznakaPolice;
     }
 
-    public StavkaPolice getStavkaPolice() {
-        return stavkaPolice;
+    public Set<StavkaPolice> getStavke() {
+        return stavke;
     }
 
-    public void setStavkaPolice(StavkaPolice stavkaPolice) {
-        this.stavkaPolice = stavkaPolice;
+    public void setStavke(Set<StavkaPolice> stavke) {
+        this.stavke = stavke;
     }
 }

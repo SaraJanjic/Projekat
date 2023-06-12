@@ -39,17 +39,24 @@ public class KnjigaService {
         }
         return null;
     }
-
-    /*public static Knjiga findOne(String naziv){
-        Optional<Knjiga> foundKnjiga = knjigaRepository.findByNaslov(naziv);
-        if (foundKnjiga.isPresent())
-            return foundKnjiga.get();
-
-        return null;
+    public void save(Knjiga knjiga) {
+        knjigaRepository.save(knjiga);
     }
 
-    public Optional<Knjiga> searchKnjige(String q){
-        return knjigaRepository.findByNaslov(q);
-    }*/
+    //////po autoruuu
+    public Knjiga nadjiKnjiguPoId(Long id){
+        return knjigaRepository.findById(id).get();
+    }
+
+
+
+    public Optional<Knjiga> findById(Long knjigaId) {
+        return knjigaRepository.findById(knjigaId);
+    }
+
+    public void delete(Knjiga knjiga) {
+        knjigaRepository.delete(knjiga);
+    }
+
 
 }

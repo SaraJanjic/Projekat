@@ -1,9 +1,9 @@
 package com.example.demo.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 @Entity
 public class ZahtevZaAktivacijuAutora {
@@ -16,13 +16,23 @@ public class ZahtevZaAktivacijuAutora {
     private String ime;
     private String prezime;
 
-    public ZahtevZaAktivacijuAutora(Long id, String email, int brojTelefona, String dodatnaPoruka, String ime, String prezime) {
+    @DateTimeFormat
+    private Date datumZahteva; //DODATE OVE DVE KOLONE
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+
+    public ZahtevZaAktivacijuAutora(Long id, String email, int brojTelefona, String dodatnaPoruka, String ime, String prezime, Date datumZahteva, Status status) {
         this.id = id;
         this.email = email;
         this.brojTelefona = brojTelefona;
         this.dodatnaPoruka = dodatnaPoruka;
         this.ime = ime;
         this.prezime = prezime;
+        this.datumZahteva = datumZahteva;
+        this.status = status;
     }
 
     public ZahtevZaAktivacijuAutora() {
@@ -76,5 +86,22 @@ public class ZahtevZaAktivacijuAutora {
 
     public void setDodatnaPoruka(String dodatnaPoruka) {
         this.dodatnaPoruka = dodatnaPoruka;
+    }
+
+
+    public Date getDatumZahteva() {
+        return datumZahteva;
+    }
+
+    public void setDatumZahteva(Date datumZahteva) {
+        this.datumZahteva = datumZahteva;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

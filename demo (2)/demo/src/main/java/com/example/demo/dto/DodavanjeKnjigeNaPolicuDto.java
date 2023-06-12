@@ -6,12 +6,12 @@ public class DodavanjeKnjigeNaPolicuDto {
 
     private  String nazivPolice;
 
-    private boolean jelPrimarna;
+    //private boolean jelPrimarna;
 
     public DodavanjeKnjigeNaPolicuDto(String nazivKnjige, String nazivPolice, boolean jelPrimarna) {
         this.nazivKnjige = nazivKnjige;
         this.nazivPolice = nazivPolice;
-        this.jelPrimarna = jelPrimarna;
+       // this.jelPrimarna = jelPrimarna;
     }
 
     public String getNazivKnjige() {
@@ -30,11 +30,11 @@ public class DodavanjeKnjigeNaPolicuDto {
         this.nazivPolice = nazivPolice;
     }
 
-    public boolean isJelPrimarna() {
-        return jelPrimarna;
-    }
+   // public boolean isJelPrimarna() {
+      //  return jelPrimarna;
+    //}
 
-    public void setJelPrimarna(boolean jelPrimarna) {
-        this.jelPrimarna = jelPrimarna;
-    }
+    //public void setJelPrimarna(boolean jelPrimarna) {
+      //  this.jelPrimarna = jelPrimarna;
+    //}
 }

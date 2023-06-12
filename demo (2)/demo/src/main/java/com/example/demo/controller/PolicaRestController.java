@@ -100,4 +100,17 @@ public class PolicaRestController {
 }
 */
 
+/*
+    @PostMapping("/api/AutornapraviPolicu")
+    public ResponseEntity<String> napraviPolicuAutor(@RequestBody PolicaDto policaDto) {
+
+        boolean jeliNapravljena = korisnikService.dodajPolicuKorisniku(policaDto.getNaziv());
+
+        if(jeliNapravljena){
+            return new ResponseEntity<>("polica dodata korisniku", HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>("polica nije dodata korisniku", HttpStatus.CONFLICT);
+        }
+    }
+*/
 }
