@@ -157,7 +157,7 @@ public class KnjigaRestController {
             Knjiga knjiga = knjigaOptional.get();
 
             knjiga.setNaslov(knjigaDto.getNaslov());
-           knjiga.setZanr(knjigaDto.getZanr());
+            knjiga.setZanr(knjigaDto.getZanr());
             knjiga.setOpis(knjigaDto.getOpis());
             knjiga.setNaslovnaSlika(knjigaDto.getNaslovnaSlika());
 
@@ -169,7 +169,7 @@ public class KnjigaRestController {
     }
 
     @DeleteMapping("/brisanje-knjige-iz-baze/{knjigaId}")
-    public ResponseEntity<?> obrisiKnjigu(@PathVariable (name="knjigaId") Long knjigaId) {
+    public ResponseEntity<?> obrisiKnjigu(@PathVariable(name = "knjigaId") Long knjigaId) {
         Optional<Knjiga> knjigaOptional = knjigaService.findById(knjigaId);
         if (knjigaOptional.isPresent()) {
             Knjiga knjiga = knjigaOptional.get();
@@ -179,7 +179,10 @@ public class KnjigaRestController {
         }
         return ResponseEntity.notFound().build();
     }
+
 }
+
+
 
 /*
  @PostMapping("/api/knjigedodavanje") //admin dodaje knjigu, probati
@@ -234,6 +237,8 @@ public class KnjigaRestController {
         }
 
     }
+
+
 
 }
 */

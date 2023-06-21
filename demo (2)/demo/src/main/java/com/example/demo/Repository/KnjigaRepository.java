@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface KnjigaRepository extends JpaRepository<Knjiga, Long> {
     Knjiga findByNaslov(String naslov);
 
+
+
 }

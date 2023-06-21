@@ -11,4 +11,7 @@ import java.util.Optional;
 @Repository
 public interface StavkaPoliceRepository extends JpaRepository<StavkaPolice, Long> {
     Optional<StavkaPolice> findByKnjiga(Knjiga knjiga); //da li moze ovako?
+
+    //default void delete(Long id, Long id1) {
+    //}
 }

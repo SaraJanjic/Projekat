@@ -2,13 +2,16 @@ package com.example.demo.controller;
 
 import com.example.demo.Entity.Korisnik;
 import com.example.demo.Entity.Polica;
+import com.example.demo.Entity.Uloga;
 import com.example.demo.Repository.PolicaRepository;
 import com.example.demo.dto.PolicaDto;
 import com.example.demo.dto.RegistracijaDto;
+import com.example.demo.service.KnjigaService;
 import com.example.demo.service.KorisnikService;
 import com.example.demo.service.PolicaService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,10 +25,13 @@ public class PolicaRestController {
     @Autowired
     private PolicaService policaService;
     @Autowired
-
     private KorisnikService korisnikService;
 
+    @Autowired
     private  PolicaRepository policaRepository;
+
+  //  @Autowired
+    //KnjigaService knjigaService;
 
     public PolicaRestController(PolicaRepository policaRepository) {
         this.policaRepository = policaRepository;
@@ -113,4 +119,18 @@ public class PolicaRestController {
         }
     }
 */
+
+/*
+    @DeleteMapping("/api/citalac/polica/{policaId}/knjiga/{knjigaId}")
+    public ResponseEntity<?> deleteKnjigaCitalac(@PathVariable Long policaId,@PathVariable Long knjigaId, HttpSession session) throws ChangeSetPersister.NotFoundException {
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+        if(loggedKorisnik.getUloga() == Uloga.CITALAC){
+            knjigaService.deleteKnjiga(loggedKorisnik.getId(), policaId,knjigaId);
+            return new ResponseEntity<>("Book deleted successfully", HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>("You are not administrator", HttpStatus.OK);
+        }
+    }
+    */
+
 }

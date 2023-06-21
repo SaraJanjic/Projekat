@@ -1,14 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.Entity.Autor;
-import com.example.demo.Entity.Korisnik;
-import com.example.demo.Entity.Status;
-import com.example.demo.Entity.ZahtevZaAktivacijuAutora;
+import com.example.demo.Entity.*;
 import com.example.demo.Repository.AutorRepository;
 import com.example.demo.Repository.ZahtevZaAktivacijuAutoraRepository;
 import com.example.demo.dto.ZahtevZaAktivacijuAutoraDTO;
 import com.example.demo.service.AutorService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -82,6 +81,7 @@ public class ZahtevZaAktivacijuAutoraController {
         return "Sacuvan autor u bazi!";
     }*/
 
+    /*
     @PostMapping("/api/napravi-autora/{zahtevId}")
     public String napraviAutora(@PathVariable (name="zahtevId") Long zahtevId, @RequestBody Autor autor) {
         Optional<ZahtevZaAktivacijuAutora> zahtevOptional = zahtevRepository.findById(zahtevId);
@@ -95,7 +95,7 @@ public class ZahtevZaAktivacijuAutoraController {
         return "Autor nije sacuvan. Zahtev nije odobren.";
 
     }
-
+*/
     @PostMapping("/zahtevi-za-aktivaciju/{zahtevId}/odbij")
     public ResponseEntity<String> odbijZahtev(@PathVariable(name = "zahtevId") Long zahtevId) {
         Optional<ZahtevZaAktivacijuAutora> zahtevOptional = zahtevRepository.findById(zahtevId);
@@ -107,6 +107,28 @@ public class ZahtevZaAktivacijuAutoraController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/api/napravi-autora")
+    public ResponseEntity<?> napraviAutora(@RequestBody ZahtevZaAktivacijuAutoraDTO zahtev, HttpSession session) {
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+        Long korisnikId = null;
+
+        if(loggedKorisnik == null){
+            return new ResponseEntity<>("Nema sesije, ulogujte se.", HttpStatus.UNAUTHORIZED);
+        }else{
+            korisnikId = loggedKorisnik.getId();
+        }
+        if(loggedKorisnik.getUloga() == Uloga.ADMINISTRATOR){
+            Autor a = new Autor();
+            a.setAktivnost(true);
+            a.setEmail(zahtev.getEmail());
+            a.setUloga(Uloga.AUTOR);
+            autorService.save(a);
+            return ResponseEntity.ok("Autor je kreiran.");
+        }
+        return  ResponseEntity.badRequest().body("NIste administrator, nemate pristup.");
+
     }
 
 }
