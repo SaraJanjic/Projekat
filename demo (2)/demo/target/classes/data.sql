@@ -21,6 +21,12 @@ INSERT INTO KNJIGA (naslov, ISBN, datum_objavljivanja, br_strana, opis, naslovna
 INSERT INTO KNJIGA (naslov, ISBN, datum_objavljivanja, br_strana, opis, naslovna_slika, zanr_id, ocena, autor_id) VALUES ('Hari Poter', 2345, '1997-06-26', 400, '...', 'slika knjige', 4, 5.00, 3);
 INSERT INTO KNJIGA (naslov, ISBN, datum_objavljivanja, br_strana, opis, naslovna_slika, zanr_id, ocena, autor_id) VALUES ('Gospodar Prstenova', 3456, '1954-11-11', 700, '...', 'slika knjige', 4, 4.90, 4);
 
-INSERT INTO RECENZIJA (ocena, tekst, datum_recenzije, korisnik_id) VALUES (4, 'Svidelo mi se', '2020-03-01', 2);
+INSERT INTO RECENZIJA (ocena, tekst, datum_recenzije, korisnik_id) VALUES (4, 'Svidece ti se!', '2020-03-01', 2);
+INSERT INTO RECENZIJA (ocena, tekst, datum_recenzije, korisnik_id) VALUES (5, 'Odlicna!', '2022-06-19', 3);
+INSERT INTO RECENZIJA (ocena, tekst, datum_recenzije, korisnik_id) VALUES (5, 'Preporucujem!', '2019-04-20', 4);
+
 
 INSERT INTO STAVKA_POLICE (knjiga_id, recenzija_id) VALUES (1, 1);
+INSERT INTO STAVKA_POLICE (knjiga_id, recenzija_id) VALUES (2, 2);
+INSERT INTO STAVKA_POLICE (knjiga_id, recenzija_id) VALUES (3, 3);
+

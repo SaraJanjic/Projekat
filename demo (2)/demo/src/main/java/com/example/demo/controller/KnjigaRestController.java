@@ -1,15 +1,13 @@
 package com.example.demo.controller;
 
-import com.example.demo.Entity.Autor;
-import com.example.demo.Entity.Knjiga;
-import com.example.demo.Entity.Korisnik;
-import com.example.demo.Entity.Zanr;
+import com.example.demo.Entity.*;
 import com.example.demo.dto.DodavanjeKnjigeNaPolicuDto;
 import com.example.demo.dto.KnjigaDto;
 import com.example.demo.dto.KorisnikDto;
 import com.example.demo.service.AutorService;
 import com.example.demo.service.KnjigaService;
 import com.example.demo.service.KorisnikService;
+import com.example.demo.service.StavkaPoliceService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +18,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 public class KnjigaRestController {
@@ -32,6 +31,8 @@ public class KnjigaRestController {
 
     @Autowired
     KorisnikService korisnikService;
+    @Autowired
+    StavkaPoliceService stavkaPoliceService;
 
     @GetMapping("/api/traziKnjiguPoId/{id}") //trazi knjigu po id-u
     public ResponseEntity<List<KnjigaDto>> traziKnjige(@PathVariable(name = "id") Long id) {
@@ -138,25 +139,16 @@ public class KnjigaRestController {
 
 
     @PostMapping("dodavanje-knjige-u-bazu")
-    public ResponseEntity<?> dodajKnjigu(@RequestBody KnjigaDto knjigaDto) {
-        Knjiga knjiga = new Knjiga();
-        knjiga.setNaslov(knjigaDto.getNaslov());
-        knjiga.setZanr(knjigaDto.getZanr());
-        knjiga.setOpis(knjigaDto.getOpis());
-        knjiga.setNaslovnaSlika(knjigaDto.getNaslovnaSlika());
+    public ResponseEntity<?> dodajKnjigu(@RequestBody KnjigaDto knjigaDto, HttpSession session) {
 
-        knjigaService.save(knjiga);
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
 
-        return ResponseEntity.ok().build();
-    }
+        if (loggedKorisnik == null) {
+            return ResponseEntity.ok("Niste ulogovani.");
+        }
 
-    // Metoda za ažuriranje knjige
-    @PutMapping("/azuriranje-knjige/{knjigaId}")
-    public ResponseEntity<?> azurirajKnjigu(@PathVariable Long knjigaId, @RequestBody KnjigaDto knjigaDto) {
-        Optional<Knjiga> knjigaOptional = knjigaService.findById(knjigaId);
-        if (knjigaOptional.isPresent()) {
-            Knjiga knjiga = knjigaOptional.get();
-
+        if (loggedKorisnik.getUloga().equals(Uloga.ADMINISTRATOR) || loggedKorisnik.getUloga().equals(Uloga.AUTOR)) {
+            Knjiga knjiga = new Knjiga();
             knjiga.setNaslov(knjigaDto.getNaslov());
             knjiga.setZanr(knjigaDto.getZanr());
             knjiga.setOpis(knjigaDto.getOpis());
@@ -164,85 +156,93 @@ public class KnjigaRestController {
 
             knjigaService.save(knjiga);
 
-            return ResponseEntity.ok().build();
+            Set<Polica> policas = loggedKorisnik.getKorisnickePolice();
+            for(Polica p : policas){
+                Set<StavkaPolice> stavke = p.getStavke();
+                for(StavkaPolice s : stavke){
+                    s.setKnjiga(knjiga);
+                }
+            }
+
+            return ResponseEntity.ok("Knjiga je dodata u bazu!");
+        } else {
+            return ResponseEntity.ok("Samo administrator i autor mogu dodavati knjige u bazu!");
         }
-        return ResponseEntity.notFound().build();
     }
+
+
+    // Metoda za ažuriranje knjige
+    @PutMapping("/azuriranje-knjige/{knjigaId}")
+    public ResponseEntity<?> azurirajKnjigu(@PathVariable Long knjigaId, @RequestBody KnjigaDto knjigaDto, HttpSession session) {
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
+
+        if (loggedKorisnik == null) {
+            return ResponseEntity.ok("Niste ulogovani.");
+        }
+
+        if (loggedKorisnik.getUloga().equals(Uloga.ADMINISTRATOR) || loggedKorisnik.getUloga().equals(Uloga.AUTOR)) {
+            Optional<Knjiga> knjigaOptional = knjigaService.findById(knjigaId);
+            if (knjigaOptional.isPresent()) {
+                Knjiga knjiga = knjigaOptional.get();
+
+                knjiga.setNaslov(knjigaDto.getNaslov());
+                knjiga.setZanr(knjigaDto.getZanr());
+                knjiga.setOpis(knjigaDto.getOpis());
+                knjiga.setNaslovnaSlika(knjigaDto.getNaslovnaSlika());
+
+                knjigaService.save(knjiga);
+
+                return ResponseEntity.ok("Knjiga je azurirana!");
+            } else {
+                return ResponseEntity.ok("Knjiga nije u bazi!");
+            }
+        } else {
+            return ResponseEntity.ok("Samo administrator i autor mogu azurirati knjige!");
+        }
+    }
+
+
 
     @DeleteMapping("/brisanje-knjige-iz-baze/{knjigaId}")
-    public ResponseEntity<?> obrisiKnjigu(@PathVariable(name = "knjigaId") Long knjigaId) {
-        Optional<Knjiga> knjigaOptional = knjigaService.findById(knjigaId);
-        if (knjigaOptional.isPresent()) {
-            Knjiga knjiga = knjigaOptional.get();
-            knjigaService.delete(knjiga);
+    public ResponseEntity<?> obrisiKnjigu(@PathVariable(name = "knjigaId") Long knjigaId, HttpSession session) {
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
 
-            return ResponseEntity.ok().build();
+        if (loggedKorisnik == null) {
+            return ResponseEntity.ok("Niste ulogovani.");
         }
-        return ResponseEntity.notFound().build();
+
+        if (loggedKorisnik.getUloga().equals(Uloga.ADMINISTRATOR)) {
+            Optional<Knjiga> knjigaOptional = knjigaService.findById(knjigaId);
+            if (knjigaOptional.isPresent()) {
+                Knjiga knjiga = knjigaOptional.get();
+                List<StavkaPolice> stavke = stavkaPoliceService.findAll();
+                for (StavkaPolice s : stavke) {
+                    if (s.getKnjiga().getId() == knjiga.getId()) {
+                        if (s.getRecenzija() == null) {
+                            knjigaService.delete(knjiga);
+                            return new ResponseEntity("Knjiga obrisana!", HttpStatus.OK);
+                        } else {
+                            return new ResponseEntity("Knjiga ima recenziju, ne moze se obrisati!", HttpStatus.CONFLICT);
+                        }
+
+                    }
+                    //knjigaService.delete(knjiga);
+                    //return new ResponseEntity("Knjiga obrisana!", HttpStatus.OK);
+                }
+                knjigaService.delete(knjiga);
+                return new ResponseEntity("Knjiga obrisana!", HttpStatus.OK);
+            } else {
+                return new ResponseEntity("Knjiga nije u bazi!", HttpStatus.CONFLICT);
+            }
+        }
+
+        return new ResponseEntity("Samo administrator moze brisati knjige iz baze!", HttpStatus.CONFLICT);
     }
+
 
 }
 
 
-
-/*
- @PostMapping("/api/knjigedodavanje") //admin dodaje knjigu, probati
-    public ResponseEntity<String> dodajKnjigu(@RequestBody KnjigaDto knjigaDto, KorisnikDto korisnikDto) {
-
-        korisnikDto.setEmail(korisnikDto.getEmail());
-        korisnikDto.setLozinka(korisnikDto.getLozinka());
-
-        if (korisnikDto.getUloga().equals("CITALAC") )
-            return new ResponseEntity("Forbidden", HttpStatus.FORBIDDEN);
-
-        Knjiga knjiga = new Knjiga();
-
-        knjiga.setNaslov(knjigaDto.getNaslov());
-        // knjiga.setAutor(knjigaDto.getAutor());
-
-        knjigaService.save(knjiga);
-
-        return ResponseEntity.ok("Knjiga uspešno dodata.");
-    }
-
-
-
-    @PostMapping("/{id}/dodaj-knjigu-na-policu")
-
-    public ResponseEntity<String> dodajKnjiguNaPolicu(
-
-            @PathVariable Long id,
-
-            @RequestParam String imeKnjige,
-
-            @RequestParam String imePolice,
-
-            @RequestParam(required = false) List<Date> datumi,
-
-            @RequestParam(required = false) Integer ocena,
-
-            @RequestParam(required = false) String misljenje
-
-    ) {
-
-        boolean uspeh = korisnikService.dodajKnjiguKorisnikuNaPolicu(id, imeKnjige, imePolice, datumi, ocena, misljenje);
-
-        if (uspeh) {
-
-            return ResponseEntity.ok("Knjiga je uspešno dodata korisniku na policu.");
-
-        } else {
-
-            return ResponseEntity.badRequest().body("Dodavanje knjige korisniku na policu nije uspelo.");
-
-        }
-
-    }
-
-
-
-}
-*/
 
 
 
