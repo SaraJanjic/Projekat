@@ -1,10 +1,7 @@
 <template>
-    <h1>Welcome</h1>
-    <button @click="handleButtonClick">Klikni me</button>
+  <div>
+    <h1>Welcome to the Home Page! </h1>
+    <router-link to="/registration"> Idi na Registraciju</router-link>router-link>
+    <router-view></router-view>
+    </div>
   </template>
-  
-  <script>
-  export default {
-    name: "HomeView",
-  };
-  </script>

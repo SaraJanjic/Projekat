@@ -2,19 +2,49 @@
   <img alt="Knjige slika" src="./assets/knjige.jpg">
   <HelloWorld msg="Welcome to Lesart reads"/>
   <router-view></router-view>
+  <search-bar @search="performSearch"></search-bar>
+  <LoginForm></LoginForm>
 </template>
 
 
 <script>
+import axios from 'axios';
 import HelloWorld from './components/HelloWorld.vue'
+import SearchBar from './views/SearchBar.vue';
+import LoginForm from './views/LoginForm.vue';
+
+
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    HelloWorld,
+    SearchBar,
+    LoginForm,
+  },
+  methods: {
+    performSearch(naslov) {
+  console.log('Search query:', naslov);
+  axios.get(`/api/traziKnjiguPoNaslovu/${naslov}`)
+    .then(response => {
+      const book = response.data;
+      if (book) {
+        console.log('Found book:', book);
+      } else {
+        console.log('Book not found');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+
   }
 }
+
 </script>
+
 
 
 <style>

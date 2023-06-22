@@ -42,7 +42,7 @@
     methods: {
       register() {
         axios.post('/api/register', this.formData)
-          .then(response => {
+          .then(() => {
             this.message = 'Uspešno ste se registrovali!';
           })
           .catch(error => {

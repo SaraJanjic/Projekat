@@ -28,8 +28,8 @@
           email: this.email,
           password: this.password
         })
-        .then(response => {
-            this.$router.push('/dashboard/' + korisnikId); //trebalo bi da odvede korisnika na personalizovanu stranicu
+        .then(() => {
+            this.$router.push('/dashboard/'); //trebalo bi da odvede korisnika na personalizovanu stranicu +korsinikId je pisalo
 
         })
         .catch(error => {

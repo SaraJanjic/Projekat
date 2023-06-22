@@ -13,15 +13,33 @@
         </li>
       </ul>
     </div>
+    <div>
+    <search-bar @search="performSearch"></search-bar>
+
+
+    <div v-if="searchResults.length">
+      <h2>Search Results</h2>
+      <ul>
+        <li v-for="book in searchResults" :key="book.id">
+          {{ book.naslov }}
+        </li>
+      </ul>
+    </div>
+    <div v-else>
+      <p>No results found.</p>
+    </div>
+  </div>
   </template>
   
   <script>
   import axios from 'axios';
+  import SearchBar from './views/SearchBar.vue';
   
   export default {
     data() {
       return {
-        knjige: []
+        knjige: [],
+        searchResults: []
       };
     },
     mounted() {
@@ -36,10 +54,21 @@
           .catch(error => {
             console.error(error);
           });
+      },
+      searchBooks(query) {
+        console.log('Search query:', query); 
+        axios.get(`/api/traziKnjiguPoNaslovu/${query}`)
+          .then(response => {
+            this.searchResults = response.data;
+          })
+          .catch(error => {
+            console.error(error);
+          });
       }
     }
   };
   </script>
+  
   
   <style>
 .knjiga-list {
