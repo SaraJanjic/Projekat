@@ -24,14 +24,9 @@
       };
     },
     created() {
-      // Pozovite API endpoint za dobavljanje korisnika
       axios.get(userEndpoint)
-  .then(response => {
-    // Dobijeni odgovor sa podacima korisnika
-    const korisnici = response.data;
-
-    // Obrada podataka korisnika
-    // Možete prikazati podatke na stranici ili ih koristiti u daljoj logici
+     .then(response => {
+      const korisnici = response.data;
 
     console.log(korisnici); // Ispis podataka korisnika u konzoli
   })
