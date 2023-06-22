@@ -3,7 +3,8 @@
   <HelloWorld msg="Welcome to Lesart reads"/>
   <router-view></router-view>
   <search-bar @search="performSearch"></search-bar>
-  <LoginForm></LoginForm>
+   <router-link to="/about">About</router-link>
+  <LoginComponent></LoginComponent>
 </template>
 
 
@@ -11,7 +12,7 @@
 import axios from 'axios';
 import HelloWorld from './components/HelloWorld.vue'
 import SearchBar from './views/SearchBar.vue';
-import LoginForm from './views/LoginForm.vue';
+import LoginComponent from './components/LoginComponent.vue';
 
 
 
@@ -21,7 +22,7 @@ export default {
   components: {
     HelloWorld,
     SearchBar,
-    LoginForm,
+    LoginComponent,
   },
   methods: {
     performSearch(naslov) {

@@ -2,8 +2,10 @@
   <div class="hello">
     <h1>{{ msg }}</h1>
     <p>
+
       Pronadjite, citajte i ocenite knjige!<br>
       <button @click="handleButtonClick">Registruj se</button>
+
     </p>
   </div>
 </template>
@@ -12,32 +14,37 @@
 import axios from 'axios';
 
 export default {
+  
   name: 'HelloWorld',
   props: {
     msg: String
   },
+
   methods: {
     handleButtonClick() {
+      
       this.$router.push('/registration');
       console.log('Registration button clicked!');
 
       // Make an HTTP POST request to the registration endpoint
-      axios.post('/api/register', {
-        // Include the necessary registration data
-        // For example, you can pass email and password as request parameters or in the request body
-        // Modify the following lines to include the actual registration data
+      axios.post('/api/register', 'api/search', {
+        
         email: 'example@example.com',
-        password: 'password123'
+        password: 'password123',
+        query: 'query'
       })
       .then(response => {
-        // Handle the response after a successful registration
+       
         console.log('Registration successful!', response.data);
-        // Add your code here to navigate to the desired page or perform any other desired actions
+        const searchResults = response.data;
+        console.log('Search results:', searchResults);
+        
       })
       .catch(error => {
-        // Handle the error in case of a failed registration
+       
         console.error('Registration failed!', error);
-        // Add your code here to display an error message or perform any other desired actions
+        console.error('Search failed!', error);
+      
       });
     }
   }
@@ -61,4 +68,21 @@ li {
 a {
   color: #42b983;
 }
+
+
+.category {
+  padding: 10px 20px;
+  margin-right: 10px;
+  background-color: #42b983;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.category:hover {
+  background-color: #379e70;
+}
+
+
 </style>

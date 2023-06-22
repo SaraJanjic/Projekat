@@ -48,11 +48,13 @@ public class KorisnikRestController {
     }
 
     @PostMapping("/api/register")
+    @CrossOrigin
     public ResponseEntity register(@RequestBody RegistracijaDto dto) {
         return korisnikService.register(dto);
     }
 
     @PostMapping("api/login")
+    @CrossOrigin
     public ResponseEntity login(@RequestBody LoginDto loginDto, HttpSession session) {
         // proverimo da li su podaci validni
         if (loginDto.getEmail().isEmpty() || loginDto.getPassword().isEmpty())
@@ -63,7 +65,7 @@ public class KorisnikRestController {
             return new ResponseEntity<>("User does not exist!", HttpStatus.NOT_FOUND);
 
         session.setAttribute("korisnik", loggedKorisnik);
-        return new ResponseEntity(loggedKorisnik.getKorisnickePolice(), HttpStatus.OK);
+        return new ResponseEntity(loggedKorisnik, HttpStatus.OK);
     }
 
     @PostMapping("api/logout")

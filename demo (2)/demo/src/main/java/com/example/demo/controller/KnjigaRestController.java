@@ -89,6 +89,7 @@ public class KnjigaRestController {
 
     //pretraga knjiga po naslovu
     @GetMapping("/api/traziKnjiguPoNaslovu/{naslov}") //trazi knjigu po naslovu, RADI
+    @CrossOrigin
     public ResponseEntity<KnjigaDto> traziKnjigePoNaslovu(@PathVariable(name = "naslov") String naslov) {
 
         Knjiga k = knjigaService.nadjiKnjiguPoNaslovu(naslov);

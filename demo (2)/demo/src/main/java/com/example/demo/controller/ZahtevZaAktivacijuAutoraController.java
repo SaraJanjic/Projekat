@@ -75,27 +75,6 @@ public class ZahtevZaAktivacijuAutoraController {
         }
     }
 
-    /*@PostMapping("/api/sacuvaj-autora")
-    public String saveAutor(@RequestBody Autor autor) {
-        this.autorService.save(autor);
-        return "Sacuvan autor u bazi!";
-    }*/
-
-    /*
-    @PostMapping("/api/napravi-autora/{zahtevId}")
-    public String napraviAutora(@PathVariable (name="zahtevId") Long zahtevId, @RequestBody Autor autor) {
-        Optional<ZahtevZaAktivacijuAutora> zahtevOptional = zahtevRepository.findById(zahtevId);
-        if (zahtevOptional.isPresent()) {
-            ZahtevZaAktivacijuAutora zahtev = zahtevOptional.get();
-            if (zahtev.getStatus().equals(Status.ODOBREN)) {
-                this.autorService.save(autor);
-                return "Sacuvan autor u bazi!";
-            }
-        }
-        return "Autor nije sacuvan. Zahtev nije odobren.";
-
-    }
-*/
     @PostMapping("/zahtevi-za-aktivaciju/{zahtevId}/odbij")
     public ResponseEntity<String> odbijZahtev(@PathVariable(name = "zahtevId") Long zahtevId) {
         Optional<ZahtevZaAktivacijuAutora> zahtevOptional = zahtevRepository.findById(zahtevId);

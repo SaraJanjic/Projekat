@@ -1,13 +1,14 @@
 <template>
     <div>
-      <h2>Korisnici</h2>
+      <h1>Korisnici</h1>
       <ul>
         <li v-for="korisnik in korisnici" :key="korisnik.id">
-          <h3>{{ korisnik.username }}</h3>
+          <h2>{{ korisnik.username }}</h2>
           <p>Ime: {{ korisnik.ime }}</p>
           <p>Prezime: {{ korisnik.prezime }}</p>
           <p>Opis: {{ korisnik.opis }}</p>
           <p>Slika: {{ korisnik.slikaKorisnika }}</p>
+          <p>Police: {{ korisnik.korisnickePolice }}</p>
         </li>
       </ul>
     </div>
@@ -15,7 +16,7 @@
   
   <script>
     import axios from 'axios';
-    const userEndpoint = 'https://api/korisnici'; //nisam sig
+    
 
   export default {
     data() {
@@ -24,7 +25,7 @@
       };
     },
     created() {
-      axios.get(userEndpoint)
+      axios.get('http://localhost:8080/api/korisnici')
      .then(response => {
       const korisnici = response.data;
 
@@ -37,7 +38,7 @@
     },
     methods: {
       fetchKorisnici() {
-        axios.get('/api/korisnici')
+        axios.get('http://localhost:8080/api/korisnici')
       .then(response => {
         this.korisnici = response.data; // Ažuriranje niza users sa dobavljenim korisnicima
       })
@@ -74,7 +75,8 @@
   .korisnik-ime,
   .korisnik-prezime,
   .korisnik-opis,
-  .korisnik-slika {
+  .korisnik-slika,
+  .korisnik-police {
     font-size: 14px;
     color: #666;
   }
