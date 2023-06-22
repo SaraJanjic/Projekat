@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.Entity.Knjiga;
 import com.example.demo.Entity.Korisnik;
+import com.example.demo.Entity.Uloga;
 import com.example.demo.Entity.Zanr;
 import com.example.demo.dto.KnjigaDto;
 import com.example.demo.dto.KorisnikDto;
@@ -10,6 +11,7 @@ import com.example.demo.service.KnjigaService;
 import com.example.demo.service.KorisnikService;
 import com.example.demo.service.ZahtevService;
 import com.example.demo.service.ZanrService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,12 +47,14 @@ public class ZanrRestController {
         return ResponseEntity.ok(dtos);
     }
 
-    @PostMapping("/api/dodavanjezanra/{userId}") //ne radi skroz dobro
-    public ResponseEntity<String> dodajNoviZanr(@PathVariable(name = "userId") Long id, @RequestBody ZanrDto zanrDto){
+    @PostMapping("/api/dodavanjezanra") //ne radi skroz dobro
+    public ResponseEntity<String> dodajNoviZanr(@RequestBody ZanrDto zanrDto, HttpSession session){
+        Korisnik loggedKorisnik = (Korisnik) session.getAttribute("korisnik");
 
-       Korisnik k = korisnikService.findById(id);
 
-        if (k.getUloga().equals("ADMINISTRATOR")) {
+       //Korisnik loggedKorisnik = korisnikService.findById(id);
+
+        if (loggedKorisnik.getUloga().equals(Uloga.ADMINISTRATOR)) {
             Zanr zanr = new Zanr();
             zanr.setId(zanrDto.getId());
             zanr.setNazivZanra(zanrDto.getNazivZanra());

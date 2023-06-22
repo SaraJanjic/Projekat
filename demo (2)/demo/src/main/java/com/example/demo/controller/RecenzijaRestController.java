@@ -44,7 +44,7 @@ public class RecenzijaRestController {
     }
 
     @GetMapping("/api/traziRecenzijuPoId/{id}") //trazi recenziju po id-u
-    public ResponseEntity<List<RecenzijaDto>> traziKnjige(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<List<RecenzijaDto>> traziRecenziju(@PathVariable(name = "id") Long id) {
         List<Recenzija> recenzije = recenzijaService.findAll();
 
         List<RecenzijaDto> recenzijePoId= new ArrayList<>();

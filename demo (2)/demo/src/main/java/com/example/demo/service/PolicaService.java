@@ -24,8 +24,8 @@ import java.util.Set;
 public class PolicaService {
     @Autowired
     private PolicaRepository policaRepository;
-    @Autowired
-    private KnjigaRepository knjigaRepository;
+   // @Autowired
+   // private KnjigaRepository knjigaRepository;
 
 
 
@@ -74,6 +74,10 @@ public class PolicaService {
         polica.setNaziv(name);
         polica.setOznakaPolice(false);
         return policaRepository.save(polica);
+    }
+
+    public Polica findById(Long policeId) {
+        return policaRepository.findById(policeId).get();
     }
 
 /*

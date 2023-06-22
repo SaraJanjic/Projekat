@@ -21,6 +21,9 @@ public class StavkaPoliceService {
     @Autowired
     private KnjigaService knjigaService;
 
+   // @Autowired
+    //PolicaService policaService;
+
 
     public StavkaPolice findOne(Knjiga knjiga){
         Optional<StavkaPolice> foundStavkaPolice = stavkaPoliceRepository.findByKnjiga(knjiga);
@@ -49,5 +52,18 @@ public class StavkaPoliceService {
 
         return null;
     }
+/*
+    public void deleteStavkaPolice(Long id, Long id1) {
+        Polica polica = policaService.findById(id);
+        List<StavkaPolice> stavkaPolices = findAll();
+
+        for(StavkaPolice s : stavkaPolices){
+            if(s.getId() == id1){
+                polica.getStavke().remove(s);
+            }
+        }
+    }
+*/
+
 
 }
