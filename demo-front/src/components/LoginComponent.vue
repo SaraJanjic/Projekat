@@ -1,7 +1,7 @@
 <template>
     <div>
       <h2>Login</h2>
-      <form @submit="submitForm">
+      <form @submit="login">
         <input type="email" v-model="email" placeholder="Email" required>
         <input type="password" v-model="password" placeholder="Password" required>
         <button type="submit">Login</button>
@@ -24,7 +24,7 @@
       submitForm(event) {
         event.preventDefault();
   
-        axios.post('http://localhost:8080/api/login', {
+        axios.post('/api/login', {
           email: this.email,
           password: this.password
         })

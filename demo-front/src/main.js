@@ -4,8 +4,9 @@ import App from './App.vue';
 import axios from 'axios';
 import RegistrationComponent from './components/RegistrationComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
-import DashboardComponent from './components/DashboardComponent.vue';
+import DashboardView from './views/DashboardView.vue';
 import SearchBar from './views/SearchBar.vue';
+import KnjigaPoNaslovu from './components/KnjigaPoNaslovu.vue';
 axios.defaults.baseURL = 'http://localhost:8080';
 
 
@@ -14,15 +15,16 @@ const router = createRouter({
     routes: [
       { path: '/registration', component: RegistrationComponent },
       {path: '/login', component: LoginComponent},
-      { path: '/dashboard/:korisnikId', component: DashboardComponent },
-      {path : '/search/:query', component: SearchBar},
-      // Add more routes as needed
+      { path: '/dashboard/:korisnikId', component: DashboardView },
+      {path : '/traziKnjiguPoId/:query', component: SearchBar}, //search
+      {path: '/traziKnjiguPoNaslovu/:naslov', component: KnjigaPoNaslovu}
+      
     ],
   });
 
 const app = createApp(App);
 app.config.globalProperties.$axios = axios;
-// Use the router instance in your app
+
 app.use(router);
 app.mount('#app');
 

@@ -1,22 +1,42 @@
 <template>
     <div>
     <input type="text" v-model="searchQuery" placeholder="Search by name or ID">
-    <button @click="searchBooks">Search</button>
+    <button @click="traziKnjiguPoId">Search</button>
+    <ul>
+      <li v-for="book in books" :key="book.naslov">
+      {{ book.naslov }}
+      <p>{{ book.naslovnaSlika }}</p>
+      <p>{{ book.ISBN }}</p>
+      <p>{{ book.datumObjavljivanja }}</p>
+      <p>{{ book.brStrana }}</p>
+      <p>{{ book.opis }}</p>
+      <p>{{ book.zanr }}</p>
+      <p>{{ book.ocena }}</p>
+      </li>
+    </ul>
     </div>
   </template>
   
   <script>
+  import axios from 'axios'
   export default {
     data() {
       return {
-        searchQuery: '',
+        books: []
       };
     },
-    methods: {
-      searchBooks() {
-        this.$emit('search', this.searchQuery);
-      },
-    },
+   created(){
+  const searchQuery = this.$route.query.searchQuery;
+    if(searchQuery){
+      axios.get(`/api/traziKnjiguPoId/{searchQuery}`)
+      .then(response =>{
+        this.books = [response.data];
+       } )
+       .catch(error => {
+        console.error('Error', error);
+       });
+  }
+}
   };
   </script>
   

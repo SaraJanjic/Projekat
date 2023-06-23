@@ -28,6 +28,8 @@
   
   <script>
   import axios from 'axios';
+
+
   
   export default {
     data() {
@@ -46,7 +48,7 @@
     methods: {
       register(event) {
         event.preventDefault();
-        axios.post('http://localhost:8080/api/register', this.formData)
+        axios.post('/api/register', this.formData)
           .then(response => {
             this.registrationStatus = response.data;
             alert("Uspesna registracija!")

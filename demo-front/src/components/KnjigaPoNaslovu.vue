@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'KnjigaPoNaslovuView',
+  name: 'KnjigaPoNaslovuView', 
   data() {
     return {
       uNaslova: '',
@@ -45,7 +45,7 @@ export default {
   methods: {
     pretrazi() {
       const naslov = encodeURIComponent(this.uNaslova);
-      const url = `http://localhost:8080/api/traziKnjiguPoNaslovu/${naslov}`;
+      const url = `/traziKnjiguPoNaslovu/${naslov}`;
 
       fetch(url)
         .then(response => {

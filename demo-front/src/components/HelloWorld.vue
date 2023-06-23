@@ -5,7 +5,7 @@
 
       Pronadjite, citajte i ocenite knjige!<br>
       <button @click="handleButtonClick">Registruj se</button>
-
+      
     </p>
   </div>
 </template>
@@ -43,9 +43,8 @@ export default {
       .catch(error => {
        
         console.error('Registration failed!', error);
-        console.error('Search failed!', error);
-      
-      });
+        console.error('Search failed!', error);      
+       });
     }
   }
 };

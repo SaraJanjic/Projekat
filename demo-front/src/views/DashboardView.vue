@@ -21,7 +21,7 @@
       // Ovo može biti axios poziv ili bilo koja druga metoda za dobavljanje podataka
   
       // Na primer, ako koristite axios:
-      axios.get('http://localhost:8080/api/korisnik')
+      axios.get(`/api/korisnik`)
         .then(response => {
           this.korisnik = response.data;
         })

@@ -5,7 +5,8 @@ import KorisnikForm from '../components/KorisnikForm.vue';
 import KnjigaPoNaslovu from '../components/KnjigaPoNaslovu.vue';
 import RegistrationForm from '../components/RegistrationForm.vue';
 import LoginForm from '../components/LoginForm.vue';
-import ZahtevComponent from '@/components/ZahtevComponent';
+import ZahtevComponent from '/components/ZahtevComponent';
+import SearchBar from '/views/SearchBar'
 
 const routes = [
   {
@@ -16,7 +17,12 @@ const routes = [
   {
     path: '/kreiraj-zahtev',
     name: 'kreirajZahtev',
-    component: KreirajZahtev
+    component: ZahtevComponent
+  },
+  {
+    path: '/traziKnjiguPoId',
+    name: 'traziKnjiguPoId',
+    component: SearchBar
   },
   {
     path: '/zahtevi-za-aktivaciju/:zahtevId/prihvati',
@@ -39,7 +45,7 @@ const routes = [
     component: KorisnikForm
   },
   {
-    path: '/traziKnjiguPoNaslovu',
+    path:' /traziKnjiguPoNaslovu/:naslov',
     name: 'traziKnjiguPoNaslovu',
     component: KnjigaPoNaslovu
   },
