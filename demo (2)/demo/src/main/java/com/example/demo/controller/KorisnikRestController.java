@@ -55,17 +55,17 @@ public class KorisnikRestController {
 
     @PostMapping("api/login")
     @CrossOrigin
-    public ResponseEntity login(@RequestBody LoginDto loginDto, HttpSession session) {
+    public ResponseEntity<Korisnik> login(@RequestBody LoginDto loginDto, HttpSession session) {
         // proverimo da li su podaci validni
         if (loginDto.getEmail().isEmpty() || loginDto.getPassword().isEmpty())
             return new ResponseEntity("Invalid login data", HttpStatus.BAD_REQUEST);
 
         Korisnik loggedKorisnik = korisnikService.login(loginDto.getEmail(), loginDto.getPassword());
         if (loggedKorisnik == null)
-            return new ResponseEntity<>("User does not exist!", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         session.setAttribute("korisnik", loggedKorisnik);
-        return new ResponseEntity(loggedKorisnik, HttpStatus.OK);
+        return ResponseEntity.ok(loggedKorisnik);
     }
 
     @PostMapping("api/logout")
@@ -80,6 +80,7 @@ public class KorisnikRestController {
     }
 
     @GetMapping("/api/korisnik")
+    @CrossOrigin
     public ResponseEntity<List<KorisnikDto>> getKorisnik(HttpSession session) {
         List<Korisnik> korisnikList = korisnikService.findAll();
 

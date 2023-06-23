@@ -58,6 +58,21 @@ const routes = [
     path: '/login',
     name: 'login',
     component: LoginForm
+  },
+  {
+    path: '/profil-admina',
+    name: 'ProfilAdmina',
+    component: ProfilAdmina
+  },
+  {
+    path: '/profil-autora',
+    name: 'ProfilAutora',
+    component: ProfilAutora
+  },
+  {
+    path: '/profil-citaoca',
+    name: 'ProfilCitaoca',
+    component: ProfilCitaoca
   }
 ];
 

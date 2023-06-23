@@ -35,6 +35,7 @@ public class KnjigaRestController {
     StavkaPoliceService stavkaPoliceService;
 
     @GetMapping("/api/traziKnjiguPoId/{id}") //trazi knjigu po id-u
+    @CrossOrigin
     public ResponseEntity<List<KnjigaDto>> traziKnjige(@PathVariable(name = "id") Long id) {
         List<Knjiga> knjige = knjigaService.nadjiSveKnjige();
 
@@ -74,6 +75,7 @@ public class KnjigaRestController {
 
 
     @GetMapping("/api/knjige") //metoda kojavraca sve knjige koje su u bazi , RADI
+    @CrossOrigin
     public ResponseEntity<List<KnjigaDto>> traziKnjige() {
         List<Knjiga> knjige = knjigaService.nadjiSveKnjige();
 

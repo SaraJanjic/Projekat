@@ -9,6 +9,7 @@ import com.example.demo.service.RecenzijaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ public class RecenzijaRestController {
 
 
     @GetMapping("/api/recenzije") //metoda koja treba da vraca sve recenzije koje su u bazi
+    @CrossOrigin
     public ResponseEntity<List<RecenzijaDto>> vratiRecenzije() {
         List<Recenzija> recenzije = recenzijaService.findAll();
 

@@ -15,8 +15,6 @@ import SearchBar from './views/SearchBar.vue';
 import LoginComponent from './components/LoginComponent.vue';
 
 
-
-
 export default {
   name: 'App',
   components: {

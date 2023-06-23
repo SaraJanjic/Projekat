@@ -31,6 +31,7 @@ public class ZanrRestController {
 
 
     @GetMapping("/api/zanrovi") //metoda koja treba da vraca sve zanrove koje su u bazi
+    @CrossOrigin
     public ResponseEntity<List<ZanrDto>> vratiZanr() {
         List<Zanr> zanrs = zanrService.findAll();
 

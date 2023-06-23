@@ -1,15 +1,19 @@
 <template>
     <div>
       <h2>Login</h2>
-      <form @submit="login">
-        <input type="email" v-model="email" placeholder="Email" required>
-        <input type="password" v-model="password" placeholder="Password" required>
+      <form @submit.prevent="login">
+        <label for="email">Email:</label>
+        <input type="text" id="email" v-model="email">
+        <br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" v-model="password">
+        <br>
         <button type="submit">Login</button>
-      </form>
-      <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
-    </div>
-  </template>
-  
+    </form>
+  </div>
+</template>
+    
+ 
   <script>
   import axios from 'axios';
   
@@ -17,28 +21,29 @@
     data() {
       return {
         email: '',
-        password: ''
+        password: '',
       };
     },
     methods: {
-      submitForm(event) {
-        event.preventDefault();
-  
-        axios.post('/api/login', {
-          email: this.email,
-          password: this.password
-        })
-         //trebalo bi da odvede korisnika na personalizovanu stranicu 
+      login() {
+      const loginData = {
+        email: this.email,
+        password: this.password,
+      };
+      axios.post('http://localhost:8080/api/login', loginData)
         .then(response => {
-            console.log('Login successful!', response.data);
-            const korisnikId = response.data.korisnikId;
-            this.$router.push(`/dashboard/${korisnikId}`);
-            })
+          // Handle successful login
+          const user = response.data;
+          localStorage.setItem('user', JSON.stringify(user));
+          this.$emit('login-success');
+        })
         .catch(error => {
-          console.error(error);
-          this.errorMessage = 'Invalid username or password';
+          console.error('Error:', error);
+          alert("greska");
+          // Handle login error
         });
       }
+
     }
   };
   </script>
