@@ -5,7 +5,6 @@
 
       Pronadjite, citajte i ocenite knjige!<br>
       <button @click="handleButtonClick">Registruj se</button>
-      <button @click="Login">Prijavi se</button>
       <button @click="showKnjige = true">Pregled Knjiga</button>
       <button @click="showZanrovi = true">Pregled Zanrova</button>
       <button @click="showRecenzije = true">Pregled Recenzija</button>
@@ -135,12 +134,6 @@ export default {
         console.error('Registration failed!', error);
         console.error('Search failed!', error);      
        });
-    },
-
-    Login() {
-      
-      this.$router.push('/login');
-      console.log('Login button clicked!');
     },
 
     fetchKnjige() {

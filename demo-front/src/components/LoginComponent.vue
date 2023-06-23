@@ -35,7 +35,7 @@
           // Handle successful login
           const user = response.data;
           localStorage.setItem('user', JSON.stringify(user));
-          this.$emit('login-success');
+          this.$emit('loginPrijava');
         })
         .catch(error => {
           console.error('Error:', error);

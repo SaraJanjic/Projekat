@@ -5,8 +5,7 @@ import axios from 'axios';
 import RegistrationComponent from './components/RegistrationComponent.vue';
 import LoginComponent from './components/LoginComponent.vue';
 import DashboardView from './views/DashboardView.vue';
-import SearchBar from './views/SearchBar.vue';
-import KnjigaPoNaslovu from './components/KnjigaPoNaslovu.vue';
+import TraziKnjiguPoNaslovuView from './views/TraziKnjiguPoNaslovuView.vue';
 axios.defaults.baseURL = 'http://localhost:8080';
 
 
@@ -16,9 +15,7 @@ const router = createRouter({
       { path: '/registration', component: RegistrationComponent },
       {path: '/login', component: LoginComponent},
       { path: '/dashboard/:korisnikId', component: DashboardView },
-      {path : '/traziKnjiguPoId/:query', component: SearchBar}, //search
-      {path: '/traziKnjiguPoNaslovu/:naslov', component: KnjigaPoNaslovu}
-      
+      { path: '/trazi-knjigu', component: TraziKnjiguPoNaslovuView }, // Dodajte rutu za pretragu knjiga ovde
     ],
   });
 
