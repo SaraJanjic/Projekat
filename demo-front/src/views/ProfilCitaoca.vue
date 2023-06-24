@@ -1,16 +1,17 @@
 <template>
-    <div>
-  <h1>Dobrodosli u profil citaoca </h1>
-      <ProfilCitaocaComponent/>
-    </div>
-    </template>
-  
-    <script>
-      import ProfilCitaocaComponent from '@/components/ProfilCitaocaComponent.vue';
+  <div>
+    <h1>Profil Čitaoca</h1>
+    <!-- Dodajte HTML i logiku za prikaz profila čitaoca -->
+  </div>
+</template>
 
-    export default{
-      components: {
-    ProfilCitaocaComponent,
-},
-    };
-    </script>
+<script>
+export default {
+  name: 'ProfilCitaoca',
+  // Dodajte logiku i podatke potrebne za prikaz profila čitaoca
+};
+</script>
+
+<style>
+/* Dodajte stilove prema potrebi */
+</style>

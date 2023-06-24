@@ -27,6 +27,7 @@ public class ZahtevZaAktivacijuAutoraController {
     }
 
     @PostMapping("/kreiraj-zahtev")
+    @CrossOrigin
     public ResponseEntity<String> podnesiZahtevZaAktivacijuAutora(@RequestBody ZahtevZaAktivacijuAutoraDTO zahtevDTO) {
 
         if (zahtevDTO.getEmail() == null) {

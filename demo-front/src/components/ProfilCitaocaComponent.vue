@@ -1,25 +1,62 @@
 <template>
-    <div>
-      <h2>Profil Čitaoca</h2>
-      <!-- Dodajte kod za prikaz informacija o profilu čitaoca -->
-    </div>
-  </template>
+  <div>
+    <h2>Dobrodošli, {{ korisnik && korisnik.ime }} {{ korisnik && korisnik.prezime }}</h2>
+    <p v-if="korisnik">Police: {{ korisnik.police }}</p>
+  </div>
+
+
+</template>
 
 <script>
+import axios from 'axios';
 export default {
-  name: 'ProfilCitaoca',
-  // Dodajte potrebne podatke ili propertije za prikaz informacija o profilu čitaoca
   data() {
     return {
-      // Dodajte podatke o profilu čitaoca
+
+      korisnik: null
     };
   },
   mounted() {
-    // Dodajte logiku za dohvaćanje podataka o profilu čitaoca
-  }
+    // Pozovite server za dobavljanje podataka o korisniku nakon prijave
+    // Ovo može biti axios poziv ili bilo koja druga metoda za dobavljanje podataka
+
+    // Na primer, ako koristite axios:
+    axios.get(`/api/korisnik`)
+      .then(response => {
+        this.korisnik = response.data;
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  },
+  
 };
 </script>
 
-<style>
-/* Dodajte stilove za oblikovanje komponente ProfilCitaoca */
+<style scoped>
+.dashboard {
+max-width: 800px;
+margin: 0 auto;
+padding: 20px;
+}
+
+.dashboard h2 {
+font-size: 24px;
+margin-bottom: 20px;
+}
+
+.dashboard p {
+margin-bottom: 10px;
+}
+
+.dashboard ul {
+list-style-type: none;
+padding: 0;
+}
+
+.dashboard li {
+margin-bottom: 5px;
+}
+
 </style>
+

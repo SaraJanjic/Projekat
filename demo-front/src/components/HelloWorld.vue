@@ -5,6 +5,7 @@
 
       Pronadjite, citajte i ocenite knjige!<br>
       <button @click="handleButtonClick">Registruj se</button>
+      <button @click="handleZahtevButton">Posalji Zahtev</button>
       <button @click="showKnjige = true">Pregled Knjiga</button>
       <button @click="showZanrovi = true">Pregled Zanrova</button>
       <button @click="showRecenzije = true">Pregled Recenzija</button>
@@ -74,8 +75,6 @@
         </li>
       </ul>
 </div>
-<p v-else>Nema korisnika.</p>
-
   </div>
 </template>
 
@@ -135,6 +134,39 @@ export default {
         console.error('Search failed!', error);      
        });
     },
+    handleZahtevButton() {
+
+this.$router.push('/zahtev');
+
+console.log('Zahtev button clicked!');
+
+
+
+axios.post('/kreiraj-zahtev', {
+
+email: this.email,
+
+brojTelefona: this.brojTelefona,
+
+dodatnaPoruka: this.dodatnaPoruka
+
+})
+
+.then(response => {
+
+console.log('Uspešno poslat zahtev!', response.data);
+
+this.$router.push('/zahtev');
+
+})
+
+.catch(error => {
+
+console.error('Greška pri obradi zahteva:', error);
+
+});
+
+},
 
     fetchKnjige() {
       axios.get('http://localhost:8080/api/knjige')

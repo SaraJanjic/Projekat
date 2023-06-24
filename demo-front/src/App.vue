@@ -2,62 +2,39 @@
   <div id="app">
     <img alt="Knjige slika" src="./assets/knjige.jpg">
     <HelloWorld msg="Welcome to Lesart reads"/>
-    <div>
-      <input type="text" v-model="naslov" placeholder="Unesite naslov knjige">
-      <button @click="pretraziKnjige">Pretraži</button>
+    <div class ="search-bar">
+      <input type="text" v-model="searchTerm" placeholder="Unesite naslov knjige">
+      <button @click="search">Pretraži</button>
     </div>
-    <router-link to="/pretraga-knjiga">Pretraži knjige</router-link>
     <router-view></router-view>
-    <login-component @login-success="handleLoginSuccess"></login-component>
-    <router-link to="/about">About</router-link>
-    <LoginComponent></LoginComponent>
+    <router-link to="/login">Go to Login</router-link><br />
+    
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
-import LoginComponent from './components/LoginComponent.vue';
-import axios from 'axios';
+
 
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    LoginComponent,
+    
   },
   data() {
     return {
-      naslov: '',
-      rezultatiPretrage: [],
+      searchTerm: '',
     };
   },
   methods: {
-    pretraziKnjige() {
-      axios.get(`/api/traziKnjiguPoNaslovu/${this.naslov}`)
-        .then(response => {
-          this.rezultatiPretrage = response.data;
-        })
-        .catch(error => {
-          console.error('Greška pri pretrazi knjiga:', error);
-        });
+    search(){
+        if(this.searchTerm){
+          this.$router.push({path : '/search', query: {searchTerm: this.searchTerm}});
+        }
     },
-    handleLoginSuccess() {
-      // Preusmjeravanje korisnika na odgovarajuću stranicu na temelju uloge
-      const userRole = JSON.parse(localStorage.getItem('user')).uloga;
-      switch (userRole) {
-        case 'CITALAC':
-          this.$router.push('/citalac-home');
-          break;
-        case 'AUTOR':
-          this.$router.push('/autor-home');
-          break;
-        case 'ADMINISTRATOR':
-          this.$router.push('/admin-home');
-          break;
-        default:
-          break;
-      }
-    }
+
+
   }
 }
 </script>

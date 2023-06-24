@@ -1,6 +1,5 @@
 <template>
-    <div>
-      <h2>Login</h2>
+    
       <form @submit.prevent="login">
         <label for="email">Email:</label>
         <input type="text" id="email" v-model="email">
@@ -9,13 +8,16 @@
         <input type="password" id="password" v-model="password">
         <br>
         <button type="submit">Login</button>
+       
     </form>
-  </div>
+ 
 </template>
     
  
   <script>
   import axios from 'axios';
+  
+
   
   export default {
     data() {
@@ -33,9 +35,11 @@
       axios.post('http://localhost:8080/api/login', loginData)
         .then(response => {
           // Handle successful login
+          
           const user = response.data;
           localStorage.setItem('user', JSON.stringify(user));
-          this.$emit('loginPrijava');
+          this.$emit('login-success');
+          console.log("uspesan login")
         })
         .catch(error => {
           console.error('Error:', error);

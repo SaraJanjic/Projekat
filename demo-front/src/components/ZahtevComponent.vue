@@ -1,65 +1,162 @@
 <template>
-    <div>
-      <h2>Zahtevi za aktivaciju autora</h2>
-      <ul>
-        <li v-for="zahtev in zahtevi" :key="zahtev.id">
-          <p>Email: {{ zahtev.email }}</p>
-          <p>Broj telefona: {{ zahtev.brojTelefona }}</p>
-          <p>Dodatna poruka: {{ zahtev.dodatnaPoruka }}</p>
-          <div>
-            <button @click="posaljiZahtev">Pošalji zahtev</button>
-          </div>
-          <button @click="prihvatiZahtev(zahtev.id)">Prihvati zahtev</button>
-        </li>
-      </ul>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        zahtevi: []
-      };
-    },
-    mounted() {
-      this.fetchZahtevi();
-    },
-    methods: {
-      fetchZahtevi() {
-        axios.get('/api/zahtevi-za-aktivaciju')
-          .then(response => {
-            this.zahtevi = response.data;
+  <div>
+    <h2>Zahtev</h2>
+    <form @submit="submitForm">
+
+      <input type="email" v-model="email" placeholder="Email" required>
+
+      <input type="tel" v-model="brojTelefona" placeholder="Broj telefona" required>
+
+      <input type="text" v-model="dodatnaPoruka" placeholder="Dodatna poruka" required>
+
+      <input type="text" v-model="ime" placeholder="Ime" required>
+
+      <input type="text" v-model="prezime" placeholder="Prezime" required>
+
+      <button type="submit">Posalji zahtev</button>
+
+    </form>
+
+    <p v-if="errorMessage" class="error-message">{{ errorMessage }}</p>
+
+  </div>
+
+</template>
+
+ 
+
+<script>
+
+import axios from 'axios';
+
+ 
+
+export default {
+
+  data() {
+
+    return {
+
+      email: '',
+
+      brojTelefona: '',
+
+      dodatnaPoruka: '',
+
+      ime: '',
+
+      prezime: ''
+
+    };
+
+  },
+
+  methods: {
+
+    submitForm(event) {
+
+      event.preventDefault();
+      
+      axios.post('/kreiraj-zahtev', {
+
+        email: this.email,
+
+        brojTelefona:this.brojTelefona,
+
+        dodatnaPoruka:this.dodatnaPoruka,
+
+        ime:this.ime,
+
+        prezime:this.prezime
+
+      })
+
+       
+
+      .then(response => {
+
+          console.log('Zahtev uspesan!', response.data);
+          
           })
-          .catch(error => {
-            console.error('Greška prilikom dohvatanja zahteva:', error);
-          });
-      },
-      prihvatiZahtev(zahtevId) {
-        axios.post(`/api/zahtevi-za-aktivaciju/${zahtevId}/prihvati`)
-          .then(response => {
-            console.log('Zahtev uspešno prihvaćen:', response.data);
-            this.fetchZahtevi();
-          })
-          .catch(error => {
-            console.error('Greška prilikom prihvatanja zahteva:', error);
-          });
-      },
-      posaljiZahtev() {
-        axios.post('/api/kreiraj-zahtev', {
-          email: 'primer@email',
-          brojTelefona: '123456789',
-          dodatnaPoruka: 'Dodatna poruka'
-        })
-          .then(response => {
-            console.log('Zahtev uspešno poslat!', response.data);
-            this.fetchZahtevi();
-          })
-          .catch(error => {
-            console.error('Greška prilikom slanja zahteva:', error);
-          });
-      },
-    },
-  };
-  </script>
-  
+
+      .catch(error => {
+
+        console.error(error);
+
+        this.errorMessage = 'Nisu dobri podaci za zahtev';
+
+      });
+
+    }
+
+  }
+
+};
+
+</script>
+
+ 
+
+<style>
+
+.login-container {
+
+max-width: 400px;
+
+margin: 0 auto;
+
+padding: 20px;
+
+border: 1px solid #ccc;
+
+border-radius: 4px;
+
+}
+
+ 
+
+.login-form {
+
+display: flex;
+
+flex-direction: column;
+
+margin-bottom: 20px;
+
+}
+
+ 
+
+.login-form input {
+
+padding: 10px;
+
+margin-bottom: 10px;
+
+}
+
+ 
+
+.login-form button {
+
+padding: 10px 20px;
+
+background-color: #337ab7;
+
+color: #fff;
+
+border: none;
+
+cursor: pointer;
+
+}
+
+ 
+
+.error-message {
+
+color: red;
+
+}
+
+</style>

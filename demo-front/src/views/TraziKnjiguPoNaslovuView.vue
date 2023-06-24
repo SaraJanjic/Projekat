@@ -1,24 +1,21 @@
 <template>
     <div>
-      <h2>Traži knjigu po naslovu</h2>
-      <form @submit.prevent="traziKnjigu">
-        <label for="naslov">Naslov knjige:</label>
-        <input type="text" id="naslov" v-model="naslov" required>
-        <br>
-        <button type="submit">Traži</button>
-      </form>
-  
-      <div v-if="knjiga">
-        <h3>Rezultat pretrage:</h3>
-        <p>Naslov: {{ knjiga.naslov }}</p>
-        <p>Autor: {{ knjiga.autor }}</p>
-        <!-- Dodajte ostale informacije o knjizi koje želite prikazati -->
-      </div>
-      <div v-else>
-        <p>Nema rezultata pretrage.</p>
-      </div>
+      <h2>Rezultati pretrage</h2>
+        <ul>
+            <li v-for="book in books" :key="book.naslov">
+              {{ book.naslov }}
+               <p> {{ book.naslovnaSlika }}</p>
+               <p>Zanr: {{ book.zanr }}</p>
+               <p>Ocena: {{ book.ocena }}</p>
+               <p>Broj strana: {{ book.brStrana }}</p>
+               <p>ISBN: {{ book.isbn }}</p>
+               <p>Opis: {{ book.opis }}</p>
+               <p>Datum objavljivanja: {{ book.datumObjavljivanja }}</p>
+            </li>
+        </ul>
     </div>
   </template>
+
   
   <script>
   import axios from 'axios';
@@ -26,24 +23,20 @@
   export default {
     data() {
       return {
-        naslov: '',
-        knjiga: null,
+        books: [],
       };
     },
-    methods: {
-      traziKnjigu() {
-        axios.get(`http://localhost:8080/api/traziKnjiguPoNaslovu/${this.naslov}`)
+    created(){
+      const searchTerm = this.$route.query.searchTerm;
+      if(searchTerm){
+        axios.get(`http://localhost:8080/api/traziKnjiguPoNaslovu/${searchTerm}`)
           .then(response => {
-            if (response.data) {
-              this.knjiga = response.data;
-            } else {
-              this.knjiga = null;
-            }
+            this.books = [response.data];
           })
           .catch(error => {
-            console.error('Greška prilikom pretrage knjige:', error);
+            console.error('Error:', error);
           });
-      },
+      }
     },
   };
   </script>
