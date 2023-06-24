@@ -1,17 +1,23 @@
 <template>
   <div>
-    <h1>Profil Administratora</h1>
-    <!-- Dodajte HTML i logiku za prikaz profila administratora -->
+    <h1>Dobrodošli na svoju stranicu</h1>
+    <button v-if="isAdmin" @click="pregledZahteva">Pregled zahteva za aktivaciju</button>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'ProfilAdmina',
-  // Dodajte logiku i podatke potrebne za prikaz profila administratora
+  // ...
+  computed: {
+    isAdmin() {
+      const userRole = JSON.parse(localStorage.getItem('user')).uloga;
+      return userRole === 'ADMINISTRATOR';
+    }
+  },
+  methods: {
+    pregledZahteva() {
+    
+    }
+  }
 };
 </script>
-
-<style>
-/* Dodajte stilove prema potrebi */
-</style>

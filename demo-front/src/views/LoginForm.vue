@@ -1,7 +1,7 @@
 
 <template>
     <div>
-      <h1>Dobrodosli u prijavu</h1>
+      <h1>Login</h1>
       <login-component @login-success="handleLoginSuccess"></login-component>
     </div>
     </template>
@@ -16,7 +16,7 @@
       methods: {
       handleLoginSuccess() {
       console.log("usao u handle")
-      // Redirect the user to the appropriate view based on their role
+      
       const userRole = JSON.parse(localStorage.getItem('user')).uloga;
       switch (userRole) {
         case 'CITALAC':

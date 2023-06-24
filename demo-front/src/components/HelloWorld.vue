@@ -114,7 +114,7 @@ export default {
       this.$router.push('/registration');
       console.log('Registration button clicked!');
   
-      // Make an HTTP POST request to the registration endpoint
+      
       axios.post('/api/register', 'api/search', {
         
         email: 'example@example.com',
@@ -219,7 +219,7 @@ console.error('Greška pri obradi zahteva:', error);
 ;
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style scoped>
 h3 {
   margin: 40px 0 0;

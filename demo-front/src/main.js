@@ -10,6 +10,7 @@ import ZahtevComponent from './components/ZahtevComponent.vue';
 import ProfilAdmina from './views/ProfilAdmina.vue';
 import ProfilCitaoca from './views/ProfilCitaoca.vue';
 import ProfilAutora from './views/ProfilAutora.vue';
+import LoginForm from './views/LoginForm.vue';
 axios.defaults.baseURL = 'http://localhost:8080';
 
 
@@ -20,7 +21,7 @@ const router = createRouter({
       { path: '/zahtev', component: ZahtevComponent },
       {path: '/login', component: LoginComponent},
       { path: '/dashboard/:korisnikId', component: DashboardView },
-      { path: '/search', component: TraziKnjiguPoNaslovuView }, // Dodajte rutu za pretragu knjiga ovde
+      { path: '/search', component: TraziKnjiguPoNaslovuView }, 
       { path: '/profil-admina', component:  ProfilAdmina},
       { path: '/profil-citaoca', component: ProfilCitaoca },
       { path: '/profil-autora', component: ProfilAutora },
@@ -29,6 +30,7 @@ const router = createRouter({
 
 const app = createApp(App);
 app.config.globalProperties.$axios = axios;
+app.component('login-form', LoginForm); 
 
 app.use(router);
 app.mount('#app');
